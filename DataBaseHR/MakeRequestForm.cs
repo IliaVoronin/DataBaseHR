@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace DataBaseHR
     {
         public int currentUserId;
         public List<object[]> requestTable;
+        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
 
         public MakeRequestForm(int id)
         {
@@ -23,9 +25,20 @@ namespace DataBaseHR
 
         private void requestButton_Click(object sender, EventArgs e)
         {
+            requestButton_logic(currentUserId, requestBox.Text, DateTime.Today);
+        }
+
+        public string requestButton_logic(int currentUserId, string requestType, DateTime dateTime)
+        {
+            try { 
             DBUtils.ExecuteCommand(String.Format("INSERT INTO requestTable (requestUserId, requestTypeId, requestDate, requestIsApproved) " +
-                "values ({0}, '{1}', '{2}', '{3}')", currentUserId, requestBox.SelectedValue, DateTime.Today, "Pending"));
+                "values ({0}, '{1}', '{2}', '{3}')", currentUserId, requestType, dateTime, "Pending"), connection);
             showData();
+            return "Request added";
+            } catch (Exception e)
+            {
+                return "Invalid data";
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -37,21 +50,34 @@ namespace DataBaseHR
             }
         }
 
-        public void deleteRow(int id)
+        public string deleteRow(int id)
         {
-            DBUtils.ExecuteCommand(String.Format("DELETE FROM requestTable WHERE requestId = {0}", id));
+            try
+            {
+                DBUtils.ExecuteCommand(String.Format("DELETE FROM requestTable WHERE requestId = {0}", id), connection);
+                return "Request deleted";
+            }
+            catch (Exception e)
+            {
+                return "Invalid data";
+            }
         }
 
-        public void showData()
+        public string showData()
         {
-            requestTable = DBUtils.Select(String.Format("SELECT r.requestId, a.requestTypeName, r.requestDate, r.requestIsApproved FROM requestTable AS r " +
-                "JOIN requestTypeTable AS a ON (r.requestTypeId=a.requestTypeId) " +
-                "WHERE requestUserId = {0}", currentUserId));
-
+            requestTable = getData(currentUserId);
             requestGridView.Rows.Clear();
             requestGridView.Refresh();
-
             DBUtils.Fill(requestGridView, requestTable);
+            return "Data accesed";
+        }
+
+        public List<object[]> getData(int currentUserId)
+        {
+            List<object[]> table = DBUtils.Select(String.Format("SELECT r.requestId, a.requestTypeName, r.requestDate, r.requestIsApproved FROM requestTable AS r " +
+                "JOIN requestTypeTable AS a ON (r.requestTypeId=a.requestTypeId) " +
+                "WHERE requestUserId = {0}", currentUserId));
+            return table;
         }
 
         private void MakeRequestForm_Load(object sender, EventArgs e)

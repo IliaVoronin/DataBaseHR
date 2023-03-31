@@ -11,12 +11,11 @@ namespace DataBaseHR
 {
 
 
-    class DBUtils
+    public class DBUtils
     {
 
-        public static void ExecuteCommand(string cmdString)
+        public static void ExecuteCommand(string cmdString, OleDbConnection connection)
         {
-            using (var connection = CreateConnection())
             {
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.CommandType = CommandType.Text;
@@ -24,18 +23,20 @@ namespace DataBaseHR
                 cmd.Connection = connection;
                 connection.Open();
                 cmd.ExecuteNonQuery();
+                connection.Close();
             }
         }
 
-        public static OleDbConnection CreateConnection()
+        public static OleDbConnection CreateConnection(string provider, string datasource, string security, string catalog)
         {
-            return new OleDbConnection("Provider=MSOLEDBSQL.1;Data Source=DESKTOP-OK3BIT4;Integrated Security=SSPI;Initial Catalog=HRDatabase");
+            return new OleDbConnection("Provider=" + provider + ";Data Source=" + datasource +
+                ";Integrated Security=" + security + ";Initial Catalog=" + catalog);
         }
 
         public static List<object[]> Select(string cmdString)
         {
             List<Object[]> o = new List<Object[]>();
-            using (var connection = CreateConnection())
+            using (var connection = CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI" , "HRD"))
             {
                 OleDbCommand select = new OleDbCommand();
                 select.Connection = connection;
@@ -68,5 +69,11 @@ namespace DataBaseHR
             }
         }
 
+        public static int countRows(string countBy, string table)
+        {
+            var c = Select(String.Format("SELECT {0} FROM {1};", countBy, table));
+            int result = c.Count;
+            return result;
+        }
     }
 }

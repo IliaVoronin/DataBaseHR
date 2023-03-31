@@ -86,12 +86,6 @@
     <Compile Include="MakeRequestForm.Designer.cs">
       <DependentUpon>MakeRequestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewbieInfoChange.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewbieInfoChange.Designer.cs">
-      <DependentUpon>NewbieInfoChange.cs</DependentUpon>
-    </Compile>
     <Compile Include="WorkerForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -26,8 +26,13 @@ namespace DataBaseHR
         {
             var login = loginTextBox.Text;
             var password = passwordTextBox.Text;
-            var encryptedPassword = EncryptionDecryptionUsingSymmetricKey.AesOperation.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", password);
+            loginButton_logic(login, password);
 
+        }
+
+        public string loginButton_logic(string login, string password)
+        {
+            var encryptedPassword = EncryptionDecryptionUsingSymmetricKey.AesOperation.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", password);
 
             if (login != "" && password != "")
             {
@@ -39,14 +44,14 @@ namespace DataBaseHR
 
                     switch (userGroupId)
                     {
-                        case 2: 
-                            formToShow = new WorkerForm((int) dataBaseTable[0][0], (int)dataBaseTable[0][4]); 
+                        case 2:
+                            formToShow = new WorkerForm((int)dataBaseTable[0][0], (int)dataBaseTable[0][4]);
                             break;
-                        case 3: 
-                            formToShow = new HRForm(); 
+                        case 3:
+                            formToShow = new HRForm();
                             break;
                         default:
-                            formToShow = new NewbieForm((int) dataBaseTable[0][0]);
+                            formToShow = new NewbieForm((int)dataBaseTable[0][0]);
                             break;
                     }
 
@@ -57,15 +62,18 @@ namespace DataBaseHR
                     });
 
                     this.Hide();
+                    return "Login successfull";
 
                 }
-                else 
+                else
                 {
                     MessageBox.Show("User is undefined!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return;
+                return "User is undefined!";
             }
             MessageBox.Show("Enter login and password");
+            return "Enter login and password";
         }
+
     }
 }
