@@ -212,7 +212,7 @@ namespace DataBaseHR
             }
             catch (System.Data.OleDb.OleDbException)
             {
-                MessageBox.Show("Недопустивые данные");
+                //MessageBox.Show("Недопустивые данные");
                 return "Invalid data";
             }
         }
@@ -267,7 +267,7 @@ namespace DataBaseHR
                 return "Post added";
             } catch(System.Data.OleDb.OleDbException)
             {
-                MessageBox.Show("Недопустивые данные");
+                //MessageBox.Show("Недопустивые данные");
                 return "Invalid data";
             }
         }
@@ -291,7 +291,7 @@ namespace DataBaseHR
                 return "Post changed";
             } catch (System.Data.OleDb.OleDbException)
             {
-                MessageBox.Show("Недопустивые данные");
+                //MessageBox.Show("Недопустивые данные");
                 return "Invalid data";
             }
         }

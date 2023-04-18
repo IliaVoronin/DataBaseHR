@@ -63,7 +63,7 @@ namespace DataBaseHR
                 return "Updated";
             }
             else {
-                MessageBox.Show("Fill info");
+                //MessageBox.Show("Fill info");
                 return "Fill info";
             }
         }

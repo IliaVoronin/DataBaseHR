@@ -75,5 +75,13 @@ namespace DataBaseHR
             int result = c.Count;
             return result;
         }
+
+        public static bool CheckForLogin(string login)
+        {
+            var loginTable = Select(String.Format("SELECT userLogin FROM userTable WHERE userLogin ='{0}'", login));
+            int num = loginTable.Count;
+
+            return (num != 0);
+        }
     }
 }

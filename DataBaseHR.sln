@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseHR", "DataBaseHR\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseHR.Tests", "DataBaseHR.Tests\DataBaseHR.Tests.csproj", "{D27AB792-C304-40F5-9F7C-C26E2943CE06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseHR.Int_Tests", "DataBaseHR.Int_Tests\DataBaseHR.Int_Tests.csproj", "{77FB66A5-F0BC-4A31-9555-F6698552C8E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D27AB792-C304-40F5-9F7C-C26E2943CE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D27AB792-C304-40F5-9F7C-C26E2943CE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D27AB792-C304-40F5-9F7C-C26E2943CE06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77FB66A5-F0BC-4A31-9555-F6698552C8E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FB66A5-F0BC-4A31-9555-F6698552C8E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FB66A5-F0BC-4A31-9555-F6698552C8E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FB66A5-F0BC-4A31-9555-F6698552C8E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

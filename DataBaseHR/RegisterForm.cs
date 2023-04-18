@@ -36,7 +36,7 @@ namespace DataBaseHR
             {
                 if (password.Length < 4)
                 {
-                    MessageBox.Show("Password must contain atleast 4 symbols");
+                    //MessageBox.Show("Password must contain atleast 4 symbols");
                     return "Password must contain atleast 4 symbols";
                 }
 
@@ -44,7 +44,7 @@ namespace DataBaseHR
 
                 if (checkTable.Any())
                 {
-                    MessageBox.Show("Username taken");
+                    //MessageBox.Show("Username taken");
                     return "Username taken";
 
                 }
@@ -55,11 +55,11 @@ namespace DataBaseHR
                     Console.WriteLine(encryptedPassword);
                     DBUtils.ExecuteCommand(String.Format("insert into userTable(userGroup, userLogin, userPassword ,userPost) values (1, '{0}','{1}', 1)", login, encryptedPassword), connection);
                     this.Close();
-                    MessageBox.Show("Regestration succesful");
+                    //MessageBox.Show("Regestration succesful");
                     return "Regestration succesful";
                 }
             }
-            MessageBox.Show("Fill in all forms");
+            //MessageBox.Show("Fill in all forms");
             return "Fill in all forms";
         }
     }
