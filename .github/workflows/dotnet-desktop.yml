@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: [windows-latest]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1.1
+        
+      - name: Build DataBaseHR unit tests
+        run: msbuild ./DataBaseHR.Tests/DataBaseHR.Tests.csproj
+        
+      - name: Setup VSTest.console.exe
+        uses: darenm/Setup-VSTest@v1
+        
+      - name: MSTest
+        working-directory: ./DataBaseHR.Tests\bin\Debug
+        shell: powershell
+        run: vstest.console.exe DataBaseHR.Tests.dll /Platform:x64
