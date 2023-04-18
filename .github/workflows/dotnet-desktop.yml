@@ -30,12 +30,12 @@ jobs:
         run: nuget restore DataBaseHR.sln
         
       - name: Build DataBaseHR unit tests
-        run: msbuild ./DataBaseHR.Int_Tests/DataBaseHR.Int_Tests.csproj
+        run: msbuild ./UnitTestProject/UnitTestProject.csproj
         
       - name: Setup VSTest.console.exe
         uses: darenm/Setup-VSTest@v1
         
       - name: MSTest
-        working-directory: ./DataBaseHR.Int_Tests/bin/Debug
+        working-directory: ./UnitTestProject/bin/Debug
         shell: powershell
-        run: vstest.console.exe DataBaseHR.Int_Tests.dll /Platform:x64
+        run: vstest.console.exe UnitTestProject.dll /Platform:x64
