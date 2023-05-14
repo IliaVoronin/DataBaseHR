@@ -23,10 +23,6 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.1
         
-      - name: Start MSSQL Server
-        run: |
-            choco install sql-server-2019-express -y
-        
       - name: Setup NuGet.exe
         uses: NuGet/setup-nuget@v1.0.6
         
@@ -34,12 +30,12 @@ jobs:
         run: nuget restore DataBaseHR.sln
         
       - name: Build DataBaseHR unit tests
-        run: msbuild ./UnitTestProject/UnitTestProject.csproj
+        run: msbuild ./DataBaseHR.Int_Tests/DataBaseHR.Int_Tests.csproj
         
       - name: Setup VSTest.console.exe
         uses: darenm/Setup-VSTest@v1
         
       - name: MSTest
-        working-directory: ./UnitTestProject/bin/Debug
+        working-directory: ./DataBaseHR.Int_Tests/bin/Debug
         shell: powershell
         run: vstest.console.exe UnitTestProject.dll /Platform:x64
