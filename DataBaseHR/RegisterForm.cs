@@ -14,7 +14,6 @@ namespace DataBaseHR
     public partial class RegisterForm : Form
     {
 
-        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
         public RegisterForm()
         {
             InitializeComponent();
@@ -53,7 +52,7 @@ namespace DataBaseHR
 
                     encryptedPassword = EncryptionDecryptionUsingSymmetricKey.AesOperation.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", password);
                     Console.WriteLine(encryptedPassword);
-                    DBUtils.ExecuteCommand(String.Format("insert into userTable(userGroup, userLogin, userPassword ,userPost) values (1, '{0}','{1}', 1)", login, encryptedPassword), connection);
+                    DBUtils.ExecuteCommand(String.Format("insert into userTable(userGroup, userLogin, userPassword ,userPost) values (1, '{0}','{1}', 1)", login, encryptedPassword));
                     this.Close();
                     //MessageBox.Show("Regestration succesful");
                     return "Regestration succesful";

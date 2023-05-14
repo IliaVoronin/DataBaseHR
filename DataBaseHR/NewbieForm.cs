@@ -18,7 +18,6 @@ namespace DataBaseHR
         public int desiredPostId;
         public List<object[]> infoTable;
         public List<object[]> postTable = DBUtils.Select(String.Format("SELECT postId, postName FROM postTable"));
-        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
 
         public NewbieForm(int id)
         {
@@ -59,7 +58,7 @@ namespace DataBaseHR
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE infoTable SET infoName = '{0}', infoSurname = '{1}', " +
                     "infoSex = '{2}', infoMail = '{3}', infoDate = '{4}', infoCountry = '{5}', infoPostId = {6} WHERE infoUserId = {7}", name, surname,
-                    sex, mail, date, country, postid + 1, currentuser), connection);
+                    sex, mail, date, country, postid + 1, currentuser));
                 return "Updated";
             }
             else {

@@ -15,7 +15,6 @@ namespace DataBaseHR
     {
         public int currentUserId;
         public List<object[]> requestTable;
-        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
 
         public MakeRequestForm(int id)
         {
@@ -32,7 +31,7 @@ namespace DataBaseHR
         {
             try { 
             DBUtils.ExecuteCommand(String.Format("INSERT INTO requestTable (requestUserId, requestTypeId, requestDate, requestIsApproved) " +
-                "values ({0}, '{1}', '{2}', '{3}')", currentUserId, requestType, dateTime, "Pending"), connection);
+                "values ({0}, '{1}', '{2}', '{3}')", currentUserId, requestType, dateTime, "Pending"));
             showData();
             return "Request added";
             } catch (Exception e)
@@ -54,7 +53,7 @@ namespace DataBaseHR
         {
             try
             {
-                DBUtils.ExecuteCommand(String.Format("DELETE FROM requestTable WHERE requestId = {0}", id), connection);
+                DBUtils.ExecuteCommand(String.Format("DELETE FROM requestTable WHERE requestId = {0}", id));
                 return "Request deleted";
             }
             catch (Exception e)

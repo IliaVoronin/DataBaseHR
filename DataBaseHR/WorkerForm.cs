@@ -58,7 +58,7 @@ namespace DataBaseHR
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE infoTable SET infoName = '{0}', infoSurname = '{1}', " +
                     "infoSex = '{2}', infoMail = '{3}', infoDate = '{4}', infoCountry = '{5}' WHERE infoUserId = {6}", name, surname,
-                    sex, mail, date, country, currentuser), connection);
+                    sex, mail, date, country, currentuser));
                 return "Updated";
             }
             else

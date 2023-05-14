@@ -46,7 +46,7 @@ namespace DataBaseHR.Int_Tests
             hrform.addPostButton_logic(postName, postSalary);
 
             Assert.AreEqual(count + 1, DBUtils.countRows("postId", "postTable"));
-            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)");
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace DataBaseHR.Int_Tests
             hrform.addVacancyButton_logic(postId.ToString(), num.ToString());
 
             Assert.AreEqual(count + 1, DBUtils.countRows("vacancyPostId", "vacancyTable"));
-            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1", connection);
+            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1");
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace DataBaseHR.Int_Tests
             requestForm.deleteRow(count);
 
             Assert.AreEqual(count, DBUtils.countRows("requestId", "requestTable"));
-            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]

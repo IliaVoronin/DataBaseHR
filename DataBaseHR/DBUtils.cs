@@ -14,8 +14,9 @@ namespace DataBaseHR
     public class DBUtils
     {
 
-        public static void ExecuteCommand(string cmdString, OleDbConnection connection)
+        public static void ExecuteCommand(string cmdString)
         {
+            using (var connection = CreateConnectionTest())
             {
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.CommandType = CommandType.Text;
@@ -41,7 +42,7 @@ namespace DataBaseHR
         public static List<object[]> Select(string cmdString)
         {
             List<Object[]> o = new List<Object[]>();
-            using (var connection = CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI" , "HRD"))
+            using (var connection = CreateConnectionTest())
             {
                 OleDbCommand select = new OleDbCommand();
                 select.Connection = connection;

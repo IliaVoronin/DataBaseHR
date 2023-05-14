@@ -18,7 +18,6 @@ namespace DataBaseHR
         public List<object[]> requestTable;
         public List<object[]> vacanciesTable;
         public List<object[]> postTable;
-        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
         public HRForm()
         {
             InitializeComponent();
@@ -65,7 +64,7 @@ namespace DataBaseHR
             foreach (DataGridViewRow item in this.workerGridView.SelectedRows)
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE userTable SET userPost = {0} " +
-                    "WHERE userId = {1}", workerChangeComboBox.SelectedValue, (int)item.Cells[0].Value), connection);
+                    "WHERE userId = {1}", workerChangeComboBox.SelectedValue, (int)item.Cells[0].Value));
             }
             updateWorkerInfo();
         }
@@ -80,7 +79,7 @@ namespace DataBaseHR
         }
         public string deleteRow(int id)
         {
-            DBUtils.ExecuteCommand(String.Format("DELETE FROM userTable WHERE userId = {0}", id), connection);
+            DBUtils.ExecuteCommand(String.Format("DELETE FROM userTable WHERE userId = {0}", id));
             return "Row deleted";
         }
 
@@ -111,7 +110,7 @@ namespace DataBaseHR
             {
                 newbiesGridView.Rows.RemoveAt(item.Index);
                 DBUtils.ExecuteCommand(String.Format("UPDATE userTable SET userGroup = 2, userPost = " +
-                    "(SELECT infoPostId FROM infoTable WHERE infoUserId = {0}) WHERE userId = {0}", (int)item.Cells[0].Value), connection);
+                    "(SELECT infoPostId FROM infoTable WHERE infoUserId = {0}) WHERE userId = {0}", (int)item.Cells[0].Value));
             }
         }
 
@@ -158,7 +157,7 @@ namespace DataBaseHR
         {
             DBUtils.ExecuteCommand(String.Format("UPDATE requestTable " +
                     "SET requestIsApproved = 'Approved' " +
-                    "WHERE requestId = {0}", requestId), connection);
+                    "WHERE requestId = {0}", requestId));
             return "Request approved";
         }
 
@@ -169,7 +168,7 @@ namespace DataBaseHR
                 requestsGridView.Rows.RemoveAt(item.Index);
                 DBUtils.ExecuteCommand(String.Format("UPDATE requestTable " +
                     "SET requestIsApproved = 'Disapproved' " +
-                    "WHERE requestId = {0}", (int)item.Cells[0].Value), connection);
+                    "WHERE requestId = {0}", (int)item.Cells[0].Value));
             }
         }
 
@@ -198,7 +197,7 @@ namespace DataBaseHR
 
         private void addVacancyButton_Click(object sender, EventArgs e)
         {
-            DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", postComboBox.Text, amountTextBox.Text), connection);
+            DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", postComboBox.Text, amountTextBox.Text));
             addPostButton_logic(postComboBox.Text, amountTextBox.Text);
             updateVacanciesInfo();
         }
@@ -207,7 +206,7 @@ namespace DataBaseHR
         {
             try
             {
-                DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", vacancyId, salary), connection);
+                DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", vacancyId, salary));
                 return "Vacancy added";
             }
             catch (System.Data.OleDb.OleDbException)
@@ -228,7 +227,7 @@ namespace DataBaseHR
 
         public void deleteVacancyRow(int id)
         {
-            DBUtils.ExecuteCommand(String.Format("DELETE FROM vacancyTable WHERE vacancyPostId = {0}", id), connection);
+            DBUtils.ExecuteCommand(String.Format("DELETE FROM vacancyTable WHERE vacancyPostId = {0}", id));
         }
 
         //POST PANEL
@@ -263,7 +262,7 @@ namespace DataBaseHR
             try 
             {
                 DBUtils.ExecuteCommand(String.Format("INSERT INTO postTable(postName, postSalary) values ('{0}',{1})"
-                , postName, postSalary), connection);
+                , postName, postSalary));
                 return "Post added";
             } catch(System.Data.OleDb.OleDbException)
             {
@@ -287,7 +286,7 @@ namespace DataBaseHR
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE postTable " +
                     "SET postSalary = {0} " +
-                    "WHERE postId = {1}", newSalary, postId), connection);
+                    "WHERE postId = {1}", newSalary, postId));
                 return "Post changed";
             } catch (System.Data.OleDb.OleDbException)
             {
@@ -307,7 +306,7 @@ namespace DataBaseHR
 
         public string deletePostButton_logic(int postId)
         {
-            DBUtils.ExecuteCommand(String.Format("DELETE FROM postTable WHERE postId = {0}", (postId)), connection);
+            DBUtils.ExecuteCommand(String.Format("DELETE FROM postTable WHERE postId = {0}", (postId)));
             return "Post deleted";
         }
     }
