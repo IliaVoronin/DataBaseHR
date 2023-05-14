@@ -7,7 +7,7 @@ namespace DataBaseHR.Int_Tests
     [TestClass]
     public class IntTests
     {
-        OleDbConnection connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
+        OleDbConnection connection = DBUtils.CreateConnectionTest();
 
         [TestMethod]
         public void SelectDatatableTest() //Проверяем правильно ли считываются таблицы с БД
@@ -115,7 +115,8 @@ namespace DataBaseHR.Int_Tests
         public void create_connection_correct_test()
         {
             //arrange
-            OleDbConnection test_connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
+            //OleDbConnection test_connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP-OK3BIT4", "SSPI", "HRD");
+            OleDbConnection test_connection = DBUtils.CreateConnectionTest();
             //act
             test_connection.Open();
             //assert
@@ -127,7 +128,7 @@ namespace DataBaseHR.Int_Tests
         public void create_connection_wrong_test()
         {
             //arrange
-            OleDbConnection test_connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP", "SSPI", "Storage");
+            OleDbConnection test_connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP", "SSPI", "FAKE");
             //act
             test_connection.Open();
             //assert - Expect exception

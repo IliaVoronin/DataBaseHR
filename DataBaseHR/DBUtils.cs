@@ -33,6 +33,11 @@ namespace DataBaseHR
                 ";Integrated Security=" + security + ";Initial Catalog=" + catalog);
         }
 
+        public static OleDbConnection CreateConnectionTest()
+        {
+            return new OleDbConnection("Provider=MSOLEDBSQL.1;Data Source=188.134.88.224;Initial Catalog=HRD;User ID=sa;Password=admin;");
+        }
+
         public static List<object[]> Select(string cmdString)
         {
             List<Object[]> o = new List<Object[]>();
