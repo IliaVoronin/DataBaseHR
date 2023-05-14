@@ -35,15 +35,6 @@ jobs:
       - name: Setup VSTest.console.exe
         uses: darenm/Setup-VSTest@v1
         
-      - name: Set up database
-        run: |
-          choco install sqllocaldb -y
-          sqllocaldb create MyLocalDB
-          sqllocaldb start MyLocalDB
-          sqlcmd -S "(localdb)\MyLocalDB" -Q "CREATE DATABASE TestDB"
-          sqlcmd -S "(localdb)\MyLocalDB" -d TestDB -Q "CREATE TABLE MyTable (Id INT, Name VARCHAR(50))"
-          sqlcmd -S "(localdb)\MyLocalDB" -d TestDB -Q "INSERT INTO MyTable (Id, Name) VALUES (1, 'Test')"
-        
       - name: MSTest
         working-directory: ./UnitTestProject/bin/Debug
         shell: powershell
