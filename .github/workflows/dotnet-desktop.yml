@@ -29,13 +29,24 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore DataBaseHR.sln
         
-      - name: Build DataBaseHR unit tests
+      - name: Build DataBaseHR Int tests
         run: msbuild ./DataBaseHR.Int_Tests/DataBaseHR.Int_Tests.csproj
         
       - name: Setup VSTest.console.exe
         uses: darenm/Setup-VSTest@v1
         
-      - name: MSTest
+      - name: Running Int tests
         working-directory: ./DataBaseHR.Int_Tests/bin/Debug
         shell: powershell
         run: vstest.console.exe DataBaseHR.Int_Tests.dll /Platform:x64
+        
+      - name: Build DataBaseHR E2E tests
+        run: msbuild ./DataBaseHR.E2E_Tests/DataBaseHR.E2E_Tests.csproj
+        
+      - name: Setup VSTest.console.exe
+        uses: darenm/Setup-VSTest@v1
+        
+      - name: Running E2E tests
+        working-directory: ./DataBaseHR.E2E_Tests/bin/Debug
+        shell: powershell
+        run: vstest.console.exe DataBaseHR.E2E_Tests.dll /Platform:x64
