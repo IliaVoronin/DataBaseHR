@@ -38,4 +38,4 @@ jobs:
       - name: MSTest
         working-directory: ./DataBaseHR.Int_Tests/bin/Debug
         shell: powershell
-        run: vstest.console.exe UnitTestProject.dll /Platform:x64
+        run: vstest.console.exe DataBaseHR.Int_Tests.dll /Platform:x64
