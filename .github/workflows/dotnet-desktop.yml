@@ -23,6 +23,10 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.1
         
+      - name: Start MSSQL Server
+        run: |
+            choco install sql-server-2019-express -y
+        
       - name: Setup NuGet.exe
         uses: NuGet/setup-nuget@v1.0.6
         
