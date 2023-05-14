@@ -1,4 +1,5 @@
-﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DataBaseHR.Tests
