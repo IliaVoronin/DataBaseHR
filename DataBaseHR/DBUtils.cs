@@ -36,7 +36,7 @@ namespace DataBaseHR
 
         public static OleDbConnection CreateConnectionTest()
         {
-            return new OleDbConnection("Provider=MSOLEDBSQL.1;Data Source=188.134.88.224;Initial Catalog=HRD;User ID=sa;Password=admin;");
+            return new OleDbConnection("Provider=MSOLEDBSQL.1;Data Source=188.134.88.224;Initial Catalog=HRD;User ID=sa;Password=Adminadmin1234;");
         }
 
         public static List<object[]> Select(string cmdString)

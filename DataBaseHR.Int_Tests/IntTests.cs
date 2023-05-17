@@ -7,7 +7,6 @@ namespace DataBaseHR.Int_Tests
     [TestClass]
     public class IntTests
     {
-        OleDbConnection connection = DBUtils.CreateConnectionTest();
 
         [TestMethod]
         public void SelectDatatableTest() //Проверяем правильно ли считываются таблицы с БД
@@ -75,7 +74,7 @@ namespace DataBaseHR.Int_Tests
             HRForm hrform = new HRForm();
             int count = DBUtils.countRows("vacancyPostId", "vacancyTable");
 
-            hrform.addVacancyButton_logic(postId.ToString(), num.ToString());
+            hrform.addVacancyButton_logic(postId, num.ToString());
 
             Assert.AreEqual(count + 1, DBUtils.countRows("vacancyPostId", "vacancyTable"));
             DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1");
@@ -85,7 +84,7 @@ namespace DataBaseHR.Int_Tests
         public void DeleteRowTest()  //Проверяем правильность удаления строки
         {
             int userId = 2;
-            string requestType = "2";
+            int requestType = 2;
             DateTime testTime = DateTime.Today;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
            

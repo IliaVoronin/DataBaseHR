@@ -27,8 +27,8 @@ namespace DataBaseHR
 
         private void NewbieForm_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet2.postTable". При необходимости она может быть перемещена или удалена.
-            this.postTableTableAdapter1.Fill(this.dataSet2.postTable);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "newbieFormDataSet.postTable". При необходимости она может быть перемещена или удалена.
+            this.postTableTableAdapter.Fill(this.newbieFormDataSet.postTable);
             updateInfo();
             panel1.Show();
             panel2.Hide();
@@ -36,6 +36,7 @@ namespace DataBaseHR
 
         private void changeInfoButton_Click(object sender, EventArgs e)
         {
+            panel1.Hide();
             panel2.Show();
         }
 
@@ -49,7 +50,7 @@ namespace DataBaseHR
         private void saveButton_Click(object sender, EventArgs e)
         {
            saveButton_logic(nameBox.Text, surnameBox.Text,
-                sexBox.Text, emailBox.Text, dateBox.Text, countryBox.Text, postBox.SelectedIndex, currentUserId);
+                sexBox.Text, emailBox.Text, dateBox.Text, countryBox.Text, Convert.ToInt32(postBox.SelectedValue), currentUserId);
         }
 
         public string saveButton_logic(string name, string surname, string sex, string mail, string date, string country, int postid, int currentuser)
@@ -58,11 +59,11 @@ namespace DataBaseHR
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE infoTable SET infoName = '{0}', infoSurname = '{1}', " +
                     "infoSex = '{2}', infoMail = '{3}', infoDate = '{4}', infoCountry = '{5}', infoPostId = {6} WHERE infoUserId = {7}", name, surname,
-                    sex, mail, date, country, postid + 1, currentuser));
+                    sex, mail, date, country, postid, currentuser));
                 return "Updated";
             }
             else {
-                //MessageBox.Show("Fill info");
+                MessageBox.Show("Fill info");
                 return "Fill info";
             }
         }
@@ -76,7 +77,7 @@ namespace DataBaseHR
             dateLabel.Text = getDate(currentUserId);
             countryLabel.Text = getCountry(currentUserId);
             desiredPostId = getPost(currentUserId);
-            postLabel.Text = (string)postTable[desiredPostId - 1][1];
+            postLabel.Text = getPostName(desiredPostId);
         }
 
         public string getName(int userid)
@@ -114,6 +115,11 @@ namespace DataBaseHR
         {
             var post = DBUtils.Select(String.Format("SELECT infoPostId FROM infoTable WHERE infoUserId = {0}", userid));
             return (int)post[0][0];
+        }
+        public string getPostName(int postid)
+        {
+            var post = DBUtils.Select(String.Format("SELECT postName FROM postTable WHERE postId = {0}", postid));
+            return (string)post[0][0];
         }
 
         private void vacanciesButton_Click(object sender, EventArgs e)

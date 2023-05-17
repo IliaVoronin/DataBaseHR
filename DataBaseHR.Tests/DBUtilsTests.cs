@@ -44,7 +44,7 @@ namespace DataBaseHR.Tests
             //arrange
             string wrongCommand = "wrong command";
             //act
-            DBUtils.ExecuteCommand(wrongCommand, correct_connection);
+            DBUtils.ExecuteCommand(wrongCommand);
             //assert - Expect exception
         }
 
@@ -56,7 +56,7 @@ namespace DataBaseHR.Tests
             string wrongCommand = "command";
             OleDbConnection wrong_connection = DBUtils.CreateConnection("MSOLEDBSQL.1", "DESKTOP", "SSPI", "Storage");
             //act
-            DBUtils.ExecuteCommand(wrongCommand, wrong_connection);
+            DBUtils.ExecuteCommand(wrongCommand);
             //assert - Expect exception (timeout)
         }
 

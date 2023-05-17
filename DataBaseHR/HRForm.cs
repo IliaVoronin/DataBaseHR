@@ -25,6 +25,8 @@ namespace DataBaseHR
 
         private void HRForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "vacanciesDataSet.postTable". При необходимости она может быть перемещена или удалена.
+            this.postTableTableAdapter1.Fill(this.vacanciesDataSet.postTable);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet3.postTable". При необходимости она может быть перемещена или удалена.
             this.postTableTableAdapter.Fill(this.dataSet3.postTable);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet3.postTable". При необходимости она может быть перемещена или удалена.
@@ -61,21 +63,22 @@ namespace DataBaseHR
 
         private void workerChangeButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.workerGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.workerGridView.SelectedCells)
             {
                 DBUtils.ExecuteCommand(String.Format("UPDATE userTable SET userPost = {0} " +
-                    "WHERE userId = {1}", workerChangeComboBox.SelectedValue, (int)item.Cells[0].Value));
+                    "WHERE userId = {1}", workerChangeComboBox.SelectedValue, (int)item.Value));
             }
             updateWorkerInfo();
         }
 
         private void fireButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.workerGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.workerGridView.SelectedCells)
             {
-                workerGridView.Rows.RemoveAt(item.Index);
-                deleteRow((int)item.Cells[0].Value);
+                //workerGridView.Rows.RemoveAt(item.Index);
+                deleteRow((int)item.Value);
             }
+            updateWorkerInfo();
         }
         public string deleteRow(int id)
         {
@@ -106,12 +109,13 @@ namespace DataBaseHR
 
         private void hireButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.newbiesGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.newbiesGridView.SelectedCells)
             {
-                newbiesGridView.Rows.RemoveAt(item.Index);
+                //newbiesGridView.Rows.RemoveAt(item.Index);
                 DBUtils.ExecuteCommand(String.Format("UPDATE userTable SET userGroup = 2, userPost = " +
-                    "(SELECT infoPostId FROM infoTable WHERE infoUserId = {0}) WHERE userId = {0}", (int)item.Cells[0].Value));
+                    "(SELECT infoPostId FROM infoTable WHERE infoUserId = {0}) WHERE userId = {0}", (int)item.Value));
             }
+            updateNewbieInfo();
         }
 
         private void declineButton_Click(object sender, EventArgs e)
@@ -146,11 +150,12 @@ namespace DataBaseHR
 
         private void approveButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.requestsGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.requestsGridView.SelectedCells)
             {
-                requestsGridView.Rows.RemoveAt(item.Index);
-                approveButton_logic((int)item.Cells[0].Value);
+                //requestsGridView.Rows.RemoveAt(item.Index);
+                approveButton_logic((int)item.Value);
             }
+            updateRequestInfo();
         }
 
         public string approveButton_logic(int requestId)
@@ -163,13 +168,14 @@ namespace DataBaseHR
 
         private void disapproveButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.requestsGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.requestsGridView.SelectedCells)
             {
-                requestsGridView.Rows.RemoveAt(item.Index);
+                //requestsGridView.Rows.RemoveAt(item.Index);
                 DBUtils.ExecuteCommand(String.Format("UPDATE requestTable " +
                     "SET requestIsApproved = 'Disapproved' " +
-                    "WHERE requestId = {0}", (int)item.Cells[0].Value));
+                    "WHERE requestId = {0}", (int)item.Value));
             }
+            updateRequestInfo();
         }
 
         //VACANCIES PANEL
@@ -197,16 +203,15 @@ namespace DataBaseHR
 
         private void addVacancyButton_Click(object sender, EventArgs e)
         {
-            DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", postComboBox.Text, amountTextBox.Text));
-            addPostButton_logic(postComboBox.Text, amountTextBox.Text);
+            addVacancyButton_logic(Convert.ToInt32(postComboBox.SelectedValue), amountTextBox.Text);
             updateVacanciesInfo();
         }
 
-        public string addVacancyButton_logic(string vacancyId, string salary)
+        public string addVacancyButton_logic(int vacancyId, string amount)
         {
             try
             {
-                DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", vacancyId, salary));
+                DBUtils.ExecuteCommand(String.Format("insert into vacancyTable values ({0}, {1})", vacancyId, amount));
                 return "Vacancy added";
             }
             catch (System.Data.OleDb.OleDbException)
@@ -218,11 +223,12 @@ namespace DataBaseHR
 
         private void deleteVacancyButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.vacanciesGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.vacanciesGridView.SelectedCells)
             {
-                vacanciesGridView.Rows.RemoveAt(item.Index);
-                deleteVacancyRow((int)item.Cells[0].Value);
+                //vacanciesGridView.Rows.RemoveAt(item.Index);
+                deleteVacancyRow((int)item.Value);
             }
+            updateVacanciesInfo();
         }
 
         public void deleteVacancyRow(int id)
@@ -273,9 +279,9 @@ namespace DataBaseHR
 
         private void changePostButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.postGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.postGridView.SelectedCells)
             {
-                changePostButton_logic(newSalaryTextBox.Text, (int)item.Cells[0].Value);
+                changePostButton_logic(newSalaryTextBox.Text, (int)item.Value);
             }
             updatePostInfo();
         }
@@ -290,16 +296,16 @@ namespace DataBaseHR
                 return "Post changed";
             } catch (System.Data.OleDb.OleDbException)
             {
-                //MessageBox.Show("Недопустивые данные");
+                MessageBox.Show("Недопустивые данные");
                 return "Invalid data";
             }
         }
 
         private void deletePostButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.postGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.postGridView.SelectedCells)
             {
-                deletePostButton_logic((int)item.Cells[0].Value);
+                deletePostButton_logic((int)item.Value);
             }
             updatePostInfo();
         }

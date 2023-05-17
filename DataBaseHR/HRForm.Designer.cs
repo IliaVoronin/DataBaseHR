@@ -78,12 +78,18 @@
             this.amountTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.postComboBox = new System.Windows.Forms.ComboBox();
+            this.postTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.vacanciesDataSet = new DataBaseHR.vacanciesDataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.vacanciesGridView = new System.Windows.Forms.DataGridView();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.postGridView = new System.Windows.Forms.DataGridView();
+            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deletePostButton = new System.Windows.Forms.Button();
             this.changePostButton = new System.Windows.Forms.Button();
             this.newSalaryTextBox = new System.Windows.Forms.TextBox();
@@ -93,11 +99,8 @@
             this.postNameTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.postGridView = new System.Windows.Forms.DataGridView();
-            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.postTableTableAdapter = new DataBaseHR.DataSet3TableAdapters.postTableTableAdapter();
+            this.postTableTableAdapter1 = new DataBaseHR.vacanciesDataSetTableAdapters.postTableTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet3)).BeginInit();
@@ -107,6 +110,8 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.requestsGridView)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vacanciesDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vacanciesGridView)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postGridView)).BeginInit();
@@ -126,8 +131,9 @@
             // 
             // workerChangeComboBox
             // 
-            this.workerChangeComboBox.DataSource = this.postTableBindingSource;
+            this.workerChangeComboBox.DataSource = this.postTableBindingSource1;
             this.workerChangeComboBox.DisplayMember = "postName";
+            this.workerChangeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workerChangeComboBox.FormattingEnabled = true;
             this.workerChangeComboBox.Location = new System.Drawing.Point(64, 291);
             this.workerChangeComboBox.Name = "workerChangeComboBox";
@@ -498,14 +504,25 @@
             // 
             // postComboBox
             // 
-            this.postComboBox.DataSource = this.postTableBindingSource;
+            this.postComboBox.DataSource = this.postTableBindingSource1;
             this.postComboBox.DisplayMember = "postName";
+            this.postComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.postComboBox.FormattingEnabled = true;
             this.postComboBox.Location = new System.Drawing.Point(439, 142);
             this.postComboBox.Name = "postComboBox";
             this.postComboBox.Size = new System.Drawing.Size(121, 21);
             this.postComboBox.TabIndex = 2;
             this.postComboBox.ValueMember = "postId";
+            // 
+            // postTableBindingSource1
+            // 
+            this.postTableBindingSource1.DataMember = "postTable";
+            this.postTableBindingSource1.DataSource = this.vacanciesDataSet;
+            // 
+            // vacanciesDataSet
+            // 
+            this.vacanciesDataSet.DataSetName = "vacanciesDataSet";
+            this.vacanciesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -545,6 +562,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.postGridView);
             this.panel5.Controls.Add(this.deletePostButton);
             this.panel5.Controls.Add(this.changePostButton);
             this.panel5.Controls.Add(this.newSalaryTextBox);
@@ -554,11 +572,37 @@
             this.panel5.Controls.Add(this.postNameTextBox);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.postGridView);
             this.panel5.Location = new System.Drawing.Point(12, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(576, 355);
             this.panel5.TabIndex = 11;
+            // 
+            // postGridView
+            // 
+            this.postGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.postGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column24,
+            this.Column25,
+            this.Column26});
+            this.postGridView.Location = new System.Drawing.Point(0, 0);
+            this.postGridView.Name = "postGridView";
+            this.postGridView.Size = new System.Drawing.Size(390, 317);
+            this.postGridView.TabIndex = 0;
+            // 
+            // Column24
+            // 
+            this.Column24.HeaderText = "Post ID";
+            this.Column24.Name = "Column24";
+            // 
+            // Column25
+            // 
+            this.Column25.HeaderText = "Post";
+            this.Column25.Name = "Column25";
+            // 
+            // Column26
+            // 
+            this.Column26.HeaderText = "Salary";
+            this.Column26.Name = "Column26";
             // 
             // deletePostButton
             // 
@@ -639,36 +683,13 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Name:";
             // 
-            // postGridView
-            // 
-            this.postGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.postGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column24,
-            this.Column25,
-            this.Column26});
-            this.postGridView.Location = new System.Drawing.Point(0, 0);
-            this.postGridView.Name = "postGridView";
-            this.postGridView.Size = new System.Drawing.Size(390, 317);
-            this.postGridView.TabIndex = 0;
-            // 
-            // Column24
-            // 
-            this.Column24.HeaderText = "Post ID";
-            this.Column24.Name = "Column24";
-            // 
-            // Column25
-            // 
-            this.Column25.HeaderText = "Post";
-            this.Column25.Name = "Column25";
-            // 
-            // Column26
-            // 
-            this.Column26.HeaderText = "Salary";
-            this.Column26.Name = "Column26";
-            // 
             // postTableTableAdapter
             // 
             this.postTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // postTableTableAdapter1
+            // 
+            this.postTableTableAdapter1.ClearBeforeFill = true;
             // 
             // HRForm
             // 
@@ -680,11 +701,11 @@
             this.Controls.Add(this.requstsButton);
             this.Controls.Add(this.newbiesButton);
             this.Controls.Add(this.workersButton);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
             this.Name = "HRForm";
             this.Text = "DirectorForm";
             this.Load += new System.EventHandler(this.HRForm_Load);
@@ -699,6 +720,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.requestsGridView)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vacanciesDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vacanciesGridView)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -778,5 +801,8 @@
         private System.Windows.Forms.ComboBox workerChangeComboBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button workerChangeButton;
+        private vacanciesDataSet vacanciesDataSet;
+        private System.Windows.Forms.BindingSource postTableBindingSource1;
+        private vacanciesDataSetTableAdapters.postTableTableAdapter postTableTableAdapter1;
     }
 }

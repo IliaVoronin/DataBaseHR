@@ -32,7 +32,7 @@
             this.passwordRegisterTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.registerButton = new System.Windows.Forms.Button();
+            this.registerButton2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // loginRegisterTextBox
@@ -67,22 +67,22 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Password:";
             // 
-            // registerButton
+            // registerButton2
             // 
-            this.registerButton.Location = new System.Drawing.Point(163, 101);
-            this.registerButton.Name = "registerButton";
-            this.registerButton.Size = new System.Drawing.Size(75, 23);
-            this.registerButton.TabIndex = 8;
-            this.registerButton.Text = "Register";
-            this.registerButton.UseVisualStyleBackColor = true;
-            this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
+            this.registerButton2.Location = new System.Drawing.Point(163, 101);
+            this.registerButton2.Name = "registerButton2";
+            this.registerButton2.Size = new System.Drawing.Size(75, 23);
+            this.registerButton2.TabIndex = 8;
+            this.registerButton2.Text = "Register";
+            this.registerButton2.UseVisualStyleBackColor = true;
+            this.registerButton2.Click += new System.EventHandler(this.registerButton_Click);
             // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 177);
-            this.Controls.Add(this.registerButton);
+            this.Controls.Add(this.registerButton2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.passwordRegisterTextBox);
@@ -99,6 +99,6 @@
         private System.Windows.Forms.TextBox passwordRegisterTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button registerButton;
+        private System.Windows.Forms.Button registerButton2;
     }
 }

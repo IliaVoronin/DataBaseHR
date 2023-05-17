@@ -60,7 +60,7 @@ namespace DataBaseHR.Tests
             string result = registerForm.registerButton_logic(login, password);
             //assert
             Assert.AreEqual(result, "Regestration succesful");
-            DBUtils.ExecuteCommand("DELETE FROM userTable WHERE userId=(SELECT MAX(userId) FROM userTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM userTable WHERE userId=(SELECT MAX(userId) FROM userTable)");
         }
     }
 }

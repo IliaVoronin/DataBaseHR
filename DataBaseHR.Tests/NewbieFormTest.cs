@@ -16,7 +16,7 @@ namespace DataBaseHR.Tests
             string mail = "test@gmail.com";
             string date = "04.04.04";
             string country = "USA";
-            int postid = 2;
+            int postid = 1;
             int userid = 3;
             NewbieForm newbieForm = new NewbieForm(userid);
             //act
@@ -62,7 +62,7 @@ namespace DataBaseHR.Tests
             string mail = "test@gmail.com";
             string date = "04.04.04";
             string country = "USA";
-            int postid = 2;
+            int postid = 1;
             int userid = 3;
             NewbieForm newbieForm = new NewbieForm(userid);
             //act
@@ -152,7 +152,7 @@ namespace DataBaseHR.Tests
             //act
             int result = newbieForm.getPost(userid);
             //assert
-            Assert.AreEqual(result, 3);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]

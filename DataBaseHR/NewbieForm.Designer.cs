@@ -48,8 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.postBox = new System.Windows.Forms.ComboBox();
-            this.postTableBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet2 = new DataBaseHR.DataSet2();
+            this.postTableBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.nameBox = new System.Windows.Forms.TextBox();
@@ -65,13 +64,18 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.postTableBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.newbieFormDataSet = new DataBaseHR.NewbieFormDataSet();
+            this.postTableBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.postTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.postTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.postTableTableAdapter1 = new DataBaseHR.DataSet2TableAdapters.postTableTableAdapter();
+            this.postTableTableAdapter = new DataBaseHR.NewbieFormDataSetTableAdapters.postTableTableAdapter();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.newbieFormDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -240,7 +244,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.emailLabel);
             this.panel1.Controls.Add(this.changeInfoButton);
@@ -259,7 +262,7 @@
             this.panel1.Controls.Add(this.dateLabel);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(338, 209);
+            this.panel1.Size = new System.Drawing.Size(385, 238);
             this.panel1.TabIndex = 17;
             // 
             // panel2
@@ -280,31 +283,22 @@
             this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.label17);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(338, 209);
+            this.panel2.Size = new System.Drawing.Size(385, 238);
             this.panel2.TabIndex = 18;
             // 
             // postBox
             // 
-            this.postBox.DataSource = this.postTableBindingSource2;
+            this.postBox.DataSource = this.postTableBindingSource3;
             this.postBox.DisplayMember = "postName";
+            this.postBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.postBox.FormattingEnabled = true;
             this.postBox.Location = new System.Drawing.Point(78, 167);
             this.postBox.Name = "postBox";
             this.postBox.Size = new System.Drawing.Size(108, 21);
             this.postBox.TabIndex = 25;
             this.postBox.ValueMember = "postId";
-            // 
-            // postTableBindingSource2
-            // 
-            this.postTableBindingSource2.DataMember = "postTable";
-            this.postTableBindingSource2.DataSource = this.dataSet2;
-            // 
-            // dataSet2
-            // 
-            this.dataSet2.DataSetName = "DataSet2";
-            this.dataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // backButton
             // 
@@ -440,6 +434,20 @@
             this.label17.TabIndex = 5;
             this.label17.Text = "Sex:";
             // 
+            // postTableBindingSource3
+            // 
+            this.postTableBindingSource3.DataMember = "postTable";
+            this.postTableBindingSource3.DataSource = this.newbieFormDataSet;
+            // 
+            // newbieFormDataSet
+            // 
+            this.newbieFormDataSet.DataSetName = "NewbieFormDataSet";
+            this.newbieFormDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // postTableBindingSource2
+            // 
+            this.postTableBindingSource2.DataMember = "postTable";
+            // 
             // postTableBindingSource1
             // 
             this.postTableBindingSource1.DataMember = "postTable";
@@ -448,15 +456,16 @@
             // 
             this.postTableBindingSource.DataMember = "postTable";
             // 
-            // postTableTableAdapter1
+            // postTableTableAdapter
             // 
-            this.postTableTableAdapter1.ClearBeforeFill = true;
+            this.postTableTableAdapter.ClearBeforeFill = true;
             // 
             // NewbieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 234);
+            this.ClientSize = new System.Drawing.Size(408, 263);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "NewbieForm";
             this.Text = "NewbieForm";
@@ -465,8 +474,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.newbieFormDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -508,11 +519,13 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.ComboBox postBox;
         private System.Windows.Forms.BindingSource postTableBindingSource;
         private System.Windows.Forms.BindingSource postTableBindingSource1;
-        private DataSet2 dataSet2;
         private System.Windows.Forms.BindingSource postTableBindingSource2;
-        private DataSet2TableAdapters.postTableTableAdapter postTableTableAdapter1;
+        private System.Windows.Forms.ComboBox postBox;
+        private NewbieFormDataSet newbieFormDataSet;
+        private System.Windows.Forms.BindingSource postTableBindingSource3;
+        private NewbieFormDataSetTableAdapters.postTableTableAdapter postTableTableAdapter;
+        private System.Windows.Forms.BindingSource postTableBindingSource4;
     }
 }

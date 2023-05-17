@@ -77,7 +77,8 @@ namespace DataBaseHR
             emailLabel.Text = getMail(currentUserId);
             dateLabel.Text = getDate(currentUserId);
             countryLabel.Text = getCountry(currentUserId);
-            postLabel.Text = (string)postTable[currentPostId - 1][1];
+            int desiredPostId = getPost(currentUserId);
+            postLabel.Text = getPostName(desiredPostId);
         }
 
         public string getName(int userid)
@@ -110,6 +111,18 @@ namespace DataBaseHR
         {
             var country = DBUtils.Select(String.Format("SELECT infoCountry FROM infoTable WHERE infoUserId = {0}", userid));
             return (string)country[0][0];
+        }
+
+        public int getPost(int userid)
+        {
+            var post = DBUtils.Select(String.Format("SELECT infoPostId FROM infoTable WHERE infoUserId = {0}", userid));
+            return (int)post[0][0];
+        }
+
+        public string getPostName(int postid)
+        {
+            var post = DBUtils.Select(String.Format("SELECT postName FROM postTable WHERE postId = {0}", postid));
+            return (string)post[0][0];
         }
 
         private void requestButton_Click(object sender, EventArgs e)

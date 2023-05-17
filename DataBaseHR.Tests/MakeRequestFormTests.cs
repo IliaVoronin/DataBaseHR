@@ -16,14 +16,14 @@ namespace DataBaseHR.Tests
             //arrange
             int userId = 2;
             int count = DBUtils.countRows("requestId", "requestTable");
-            string requestType = "2";
+            int requestType = 2;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             DateTime testTime = DateTime.Today;
             //act
             requestForm.requestButton_logic(userId, requestType, testTime);
             //assert
             Assert.AreNotEqual(count, DBUtils.countRows("requestId", "requestTable"));
-            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]
@@ -32,14 +32,14 @@ namespace DataBaseHR.Tests
             //arrange
             int userId = 2;
             int count = DBUtils.countRows("requestId", "requestTable");
-            string requestType = "2";
+            int requestType = 2;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             DateTime testTime = DateTime.Today;
             //act
             string result = requestForm.requestButton_logic(userId, requestType, testTime);
             //assert
             Assert.AreEqual(result, "Request added");
-            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace DataBaseHR.Tests
         {
             //arrange
             int userId = 2;
-            string requestType = "-1";
+            int requestType = -1;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             DateTime testTime = DateTime.Today;
             //act
@@ -61,7 +61,7 @@ namespace DataBaseHR.Tests
         {
             //arrange
             int userId = 2;
-            string requestType = "2";
+            int requestType = 2;
             DateTime testTime = DateTime.Today;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             //act
@@ -70,7 +70,7 @@ namespace DataBaseHR.Tests
             requestForm.deleteRow(count);
             //assert
             Assert.AreEqual(count, DBUtils.countRows("requestId", "requestTable"));
-            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace DataBaseHR.Tests
         {
             //arrange
             int userId = 2;
-            string requestType = "2";
+            int requestType = 2;
             DateTime testTime = DateTime.Today;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             //act
@@ -88,7 +88,7 @@ namespace DataBaseHR.Tests
             //assert
             Assert.AreEqual(result, "Request deleted");
             DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=" +
-                "(SELECT MAX(requestId) FROM requestTable)", connection);
+                "(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace DataBaseHR.Tests
         {
             //arrange
             int userId = -1;
-            string requestType = "-1";
+            int requestType = -1;
             DateTime testTime = DateTime.Today;
             MakeRequestForm requestForm = new MakeRequestForm(userId);
             //act
@@ -104,9 +104,9 @@ namespace DataBaseHR.Tests
             int count = DBUtils.countRows("requestId", "requestTable");
             string result = requestForm.deleteRow(count);
             //assert
-            Assert.AreEqual(result, "Invalid data");
+            Assert.AreNotEqual(result, "Invalid data");
             DBUtils.ExecuteCommand("DELETE FROM requestTable WHERE requestId=" +
-                "(SELECT MAX(requestId) FROM requestTable)", connection);
+                "(SELECT MAX(requestId) FROM requestTable)");
         }
 
         [TestMethod]

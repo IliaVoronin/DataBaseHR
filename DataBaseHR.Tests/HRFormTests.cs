@@ -23,7 +23,7 @@ namespace DataBaseHR.Tests
             hrform.addPostButton_logic(postName, postSalary);
             //assert
             Assert.AreEqual(count + 1, DBUtils.countRows("postId", "postTable"));
-            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)");
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace DataBaseHR.Tests
             string result = hrform.addPostButton_logic(postName, postSalary);
             //assert
             Assert.AreEqual(result, "Post added");
-            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)");
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace DataBaseHR.Tests
             hrform.deletePostButton_logic(count);
             //assert
             Assert.AreEqual(count, DBUtils.countRows("postId", "postTable"));
-            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)", connection);
+            DBUtils.ExecuteCommand("DELETE FROM postTable WHERE postId=(SELECT MAX(postId) FROM postTable)");
         }
 
         [TestMethod]
@@ -118,10 +118,10 @@ namespace DataBaseHR.Tests
             HRForm hrform = new HRForm();
             int count = DBUtils.countRows("vacancyPostId", "vacancyTable");
             //act
-            hrform.addVacancyButton_logic(postId.ToString(),num.ToString());
+            hrform.addVacancyButton_logic(postId,num.ToString());
             //assert
             Assert.AreEqual(count + 1, DBUtils.countRows("vacancyPostId", "vacancyTable"));
-            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1", connection);
+            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1");
         }
 
         [TestMethod]
@@ -133,10 +133,10 @@ namespace DataBaseHR.Tests
             HRForm hrform = new HRForm();
             int count = DBUtils.countRows("vacancyPostId", "vacancyTable");
             //act
-            string result = hrform.addVacancyButton_logic(postId.ToString(), num.ToString());
+            string result = hrform.addVacancyButton_logic(postId, num.ToString());
             //assert
             Assert.AreEqual(result, "Vacancy added");
-            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1", connection);
+            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1");
         }
 
         [TestMethod]
@@ -146,10 +146,10 @@ namespace DataBaseHR.Tests
             HRForm hrform = new HRForm();
             int count = DBUtils.countRows("vacancyPostId", "vacancyTable");
             //act
-            string result = hrform.addVacancyButton_logic("500", "test");
+            string result = hrform.addVacancyButton_logic(500, "test");
             //assert
             Assert.AreEqual(result, "Invalid data");
-            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1", connection);
+            DBUtils.ExecuteCommand("DELETE FROM vacancyTable WHERE vacancyPostId=1");
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ namespace DataBaseHR.Tests
             int num = 9;
             HRForm hrform = new HRForm();
             //act
-            hrform.addVacancyButton_logic(postId.ToString(), num.ToString());
+            hrform.addVacancyButton_logic(postId, num.ToString());
             int count = DBUtils.countRows("vacancyPostId", "vacancyTable");
             hrform.deleteVacancyRow(postId);
             //assert

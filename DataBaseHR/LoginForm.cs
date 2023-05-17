@@ -71,7 +71,7 @@ namespace DataBaseHR
                 }
                 return "User is undefined!";
             }
-            MessageBox.Show("Enter login and password");
+            MessageBox.Show("Enter login and password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return "Enter login and password";
         }
 

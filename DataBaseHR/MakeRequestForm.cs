@@ -24,10 +24,10 @@ namespace DataBaseHR
 
         private void requestButton_Click(object sender, EventArgs e)
         {
-            requestButton_logic(currentUserId, requestBox.Text, DateTime.Today);
+            requestButton_logic(currentUserId, Convert.ToInt32(requestBox.SelectedValue), DateTime.Today);
         }
 
-        public string requestButton_logic(int currentUserId, string requestType, DateTime dateTime)
+        public string requestButton_logic(int currentUserId, int requestType, DateTime dateTime)
         {
             try { 
             DBUtils.ExecuteCommand(String.Format("INSERT INTO requestTable (requestUserId, requestTypeId, requestDate, requestIsApproved) " +
@@ -42,11 +42,12 @@ namespace DataBaseHR
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.requestGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.requestGridView.SelectedCells)
             {
-                requestGridView.Rows.RemoveAt(item.Index);
-                deleteRow((int)item.Cells[0].Value);
+                //requestGridView.Rows.RemoveAt(item.Index);
+                deleteRow((int)item.Value);
             }
+            showData();
         }
 
         public string deleteRow(int id)
@@ -81,6 +82,8 @@ namespace DataBaseHR
 
         private void MakeRequestForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "requestTypeDataSet.requestTypeTable". При необходимости она может быть перемещена или удалена.
+            this.requestTypeTableTableAdapter1.Fill(this.requestTypeDataSet.requestTypeTable);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet4.requestTypeTable". При необходимости она может быть перемещена или удалена.
             this.requestTypeTableTableAdapter.Fill(this.dataSet4.requestTypeTable);
             showData();

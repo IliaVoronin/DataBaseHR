@@ -36,18 +36,23 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.requestBox = new System.Windows.Forms.ComboBox();
+            this.requestTypeTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet4 = new DataBaseHR.DataSet4();
             this.requestButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.dataSet1 = new DataBaseHR.DataSet1();
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet4 = new DataBaseHR.DataSet4();
-            this.requestTypeTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.requestTypeTableTableAdapter = new DataBaseHR.DataSet4TableAdapters.requestTypeTableTableAdapter();
+            this.requestTypeDataSet = new DataBaseHR.requestTypeDataSet();
+            this.requestTypeTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.requestTypeTableTableAdapter1 = new DataBaseHR.requestTypeDataSetTableAdapters.requestTypeTableTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.requestGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // requestGridView
@@ -94,14 +99,25 @@
             // 
             // requestBox
             // 
-            this.requestBox.DataSource = this.requestTypeTableBindingSource;
+            this.requestBox.DataSource = this.requestTypeTableBindingSource1;
             this.requestBox.DisplayMember = "requestTypeName";
+            this.requestBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.requestBox.FormattingEnabled = true;
             this.requestBox.Location = new System.Drawing.Point(78, 185);
             this.requestBox.Name = "requestBox";
             this.requestBox.Size = new System.Drawing.Size(121, 21);
             this.requestBox.TabIndex = 2;
             this.requestBox.ValueMember = "requestTypeId";
+            // 
+            // requestTypeTableBindingSource
+            // 
+            this.requestTypeTableBindingSource.DataMember = "requestTypeTable";
+            this.requestTypeTableBindingSource.DataSource = this.dataSet4;
+            // 
+            // dataSet4
+            // 
+            this.dataSet4.DataSetName = "DataSet4";
+            this.dataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // requestButton
             // 
@@ -133,19 +149,23 @@
             this.dataSet1BindingSource.DataSource = this.dataSet1;
             this.dataSet1BindingSource.Position = 0;
             // 
-            // dataSet4
-            // 
-            this.dataSet4.DataSetName = "DataSet4";
-            this.dataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // requestTypeTableBindingSource
-            // 
-            this.requestTypeTableBindingSource.DataMember = "requestTypeTable";
-            this.requestTypeTableBindingSource.DataSource = this.dataSet4;
-            // 
             // requestTypeTableTableAdapter
             // 
             this.requestTypeTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // requestTypeDataSet
+            // 
+            this.requestTypeDataSet.DataSetName = "requestTypeDataSet";
+            this.requestTypeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // requestTypeTableBindingSource1
+            // 
+            this.requestTypeTableBindingSource1.DataMember = "requestTypeTable";
+            this.requestTypeTableBindingSource1.DataSource = this.requestTypeDataSet;
+            // 
+            // requestTypeTableTableAdapter1
+            // 
+            this.requestTypeTableTableAdapter1.ClearBeforeFill = true;
             // 
             // MakeRequestForm
             // 
@@ -161,10 +181,12 @@
             this.Text = "MakeRequestForm";
             this.Load += new System.EventHandler(this.MakeRequestForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.requestGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.requestTypeTableBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,5 +208,8 @@
         private DataSet4 dataSet4;
         private System.Windows.Forms.BindingSource requestTypeTableBindingSource;
         private DataSet4TableAdapters.requestTypeTableTableAdapter requestTypeTableTableAdapter;
+        private requestTypeDataSet requestTypeDataSet;
+        private System.Windows.Forms.BindingSource requestTypeTableBindingSource1;
+        private requestTypeDataSetTableAdapters.requestTypeTableTableAdapter requestTypeTableTableAdapter1;
     }
 }
