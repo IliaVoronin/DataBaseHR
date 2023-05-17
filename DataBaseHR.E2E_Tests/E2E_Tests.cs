@@ -30,7 +30,7 @@ namespace DataBaseHR.E2ETests
         [SetUp]
         public void Setup()
         {
-            SftpClient sftpClient = new SftpClient("188.134.88.224:4723", 22, "Walker", "LiMingHao");
+            SftpClient sftpClient = new SftpClient("188.134.88.224", 22, "Walker", "LiMingHao");
             try
             {
                 sftpClient.Connect();
@@ -49,11 +49,11 @@ namespace DataBaseHR.E2ETests
             Assert.IsNotNull(DesktopSession);
         }
 
-        // Сценарий 1: Пользователь хочет создать аккаунт. Запускает приложение, нажимает на кнопку регистрации,
-        // перодит в окно регистрации, вводит логин и пароль, нажимает зарегестрироваться. Совершает попытку входа
-        // в систему, вход выполнен. Так же хочет изменить данные о себе, нажимает кнопку "изменить данные",
-        // переходит в окно изменения данных, вводит новые данные, нажимает сохранить изменения. Возвращается 
-        // на главный экран, видит что данные сохранились. 
+        // Г‘Г¶ГҐГ­Г Г°ГЁГ© 1: ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГµГ®Г·ГҐГІ Г±Г®Г§Г¤Г ГІГј Г ГЄГЄГ ГіГ­ГІ. Г‡Г ГЇГіГ±ГЄГ ГҐГІ ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГҐ, Г­Г Г¦ГЁГ¬Г ГҐГІ Г­Г  ГЄГ­Г®ГЇГЄГі Г°ГҐГЈГЁГ±ГІГ°Г Г¶ГЁГЁ,
+        // ГЇГҐГ°Г®Г¤ГЁГІ Гў Г®ГЄГ­Г® Г°ГҐГЈГЁГ±ГІГ°Г Г¶ГЁГЁ, ГўГўГ®Г¤ГЁГІ Г«Г®ГЈГЁГ­ ГЁ ГЇГ Г°Г®Г«Гј, Г­Г Г¦ГЁГ¬Г ГҐГІ Г§Г Г°ГҐГЈГҐГ±ГІГ°ГЁГ°Г®ГўГ ГІГјГ±Гї. Г‘Г®ГўГҐГ°ГёГ ГҐГІ ГЇГ®ГЇГ»ГІГЄГі ГўГµГ®Г¤Г 
+        // Гў Г±ГЁГ±ГІГҐГ¬Гі, ГўГµГ®Г¤ ГўГ»ГЇГ®Г«Г­ГҐГ­. Г’Г ГЄ Г¦ГҐ ГµГ®Г·ГҐГІ ГЁГ§Г¬ГҐГ­ГЁГІГј Г¤Г Г­Г­Г»ГҐ Г® Г±ГҐГЎГҐ, Г­Г Г¦ГЁГ¬Г ГҐГІ ГЄГ­Г®ГЇГЄГі "ГЁГ§Г¬ГҐГ­ГЁГІГј Г¤Г Г­Г­Г»ГҐ",
+        // ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Гў Г®ГЄГ­Г® ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї Г¤Г Г­Г­Г»Гµ, ГўГўГ®Г¤ГЁГІ Г­Г®ГўГ»ГҐ Г¤Г Г­Г­Г»ГҐ, Г­Г Г¦ГЁГ¬Г ГҐГІ Г±Г®ГµГ°Г Г­ГЁГІГј ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї. Г‚Г®Г§ГўГ°Г Г№Г ГҐГІГ±Гї 
+        // Г­Г  ГЈГ«Г ГўГ­Г»Г© ГЅГЄГ°Г Г­, ГўГЁГ¤ГЁГІ Г·ГІГ® Г¤Г Г­Г­Г»ГҐ Г±Г®ГµГ°Г Г­ГЁГ«ГЁГ±Гј. 
 
         [Test]
         public void Test1_register()
@@ -113,7 +113,7 @@ namespace DataBaseHR.E2ETests
             countryBox.SendKeys(testCountry);
             WindowsElement postBox = DesktopSession.FindElementByAccessibilityId("postBox");
             postBox.Click();
-            postBox.FindElementByName("Уборщик").Click();
+            postBox.FindElementByName("Г“ГЎГ®Г°Г№ГЁГЄ").Click();
 
 
             WindowsElement saveButton = DesktopSession.FindElementByAccessibilityId("saveButton");
@@ -141,8 +141,8 @@ namespace DataBaseHR.E2ETests
 
         
 
-        // Сценарий 2: Пользователь хочет войти в систему но вводит не правильный пароль, получается соответствующую ошибку,
-        // закрывает её, вводит пароль и успешно входит в систему.
+        // Г‘Г¶ГҐГ­Г Г°ГЁГ© 2: ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГµГ®Г·ГҐГІ ГўГ®Г©ГІГЁ Гў Г±ГЁГ±ГІГҐГ¬Гі Г­Г® ГўГўГ®Г¤ГЁГІ Г­ГҐ ГЇГ°Г ГўГЁГ«ГјГ­Г»Г© ГЇГ Г°Г®Г«Гј, ГЇГ®Г«ГіГ·Г ГҐГІГ±Гї Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№ГіГѕ Г®ГёГЁГЎГЄГі,
+        // Г§Г ГЄГ°Г»ГўГ ГҐГІ ГҐВё, ГўГўГ®Г¤ГЁГІ ГЇГ Г°Г®Г«Гј ГЁ ГіГ±ГЇГҐГёГ­Г® ГўГµГ®Г¤ГЁГІ Гў Г±ГЁГ±ГІГҐГ¬Гі.
 
         [Test]
         public void Test2_wrong_password()
@@ -184,8 +184,8 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        // Сценарий 3: Пользователь пытается войти, забыв указать одно из полей, получает ошибку о том, 
-        // что не запролнил все поля, закрывает её, заново вводит данные и успешно входит в систему
+        // Г‘Г¶ГҐГ­Г Г°ГЁГ© 3: ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГЇГ»ГІГ ГҐГІГ±Гї ГўГ®Г©ГІГЁ, Г§Г ГЎГ»Гў ГіГЄГ Г§Г ГІГј Г®Г¤Г­Г® ГЁГ§ ГЇГ®Г«ГҐГ©, ГЇГ®Г«ГіГ·Г ГҐГІ Г®ГёГЁГЎГЄГі Г® ГІГ®Г¬, 
+        // Г·ГІГ® Г­ГҐ Г§Г ГЇГ°Г®Г«Г­ГЁГ« ГўГ±ГҐ ГЇГ®Г«Гї, Г§Г ГЄГ°Г»ГўГ ГҐГІ ГҐВё, Г§Г Г­Г®ГўГ® ГўГўГ®Г¤ГЁГІ Г¤Г Г­Г­Г»ГҐ ГЁ ГіГ±ГЇГҐГёГ­Г® ГўГµГ®Г¤ГЁГІ Гў Г±ГЁГ±ГІГҐГ¬Гі
 
         [Test]
         public void Test3_no_data()
@@ -224,8 +224,8 @@ namespace DataBaseHR.E2ETests
         }
 
 
-        //Сценарий 4: Администратор должен зайти в приложение, перейти во вкладку профессий,
-        // добавить профессию, изменить её зарплату
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 4: ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° Г¤Г®Г«Г¦ГҐГ­ Г§Г Г©ГІГЁ Гў ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГҐ, ГЇГҐГ°ГҐГ©ГІГЁ ГўГ® ГўГЄГ«Г Г¤ГЄГі ГЇГ°Г®ГґГҐГ±Г±ГЁГ©,
+        // Г¤Г®ГЎГ ГўГЁГІГј ГЇГ°Г®ГґГҐГ±Г±ГЁГѕ, ГЁГ§Г¬ГҐГ­ГЁГІГј ГҐВё Г§Г Г°ГЇГ«Г ГІГі
 
         [Test]
         public void Test4_add_change_delete_post()
@@ -266,11 +266,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Строка 0");
+            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Г‘ГІГ°Г®ГЄГ  0");
             postNameCell.Click();
             string postName = postNameCell.GetAttribute("Value.Value");
 
-            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Строка 0");
+            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Г‘ГІГ°Г®ГЄГ  0");
             postToChange.Click();
 
             newSalaryTextBox.SendKeys("1010");
@@ -286,9 +286,9 @@ namespace DataBaseHR.E2ETests
         
         
 
-        //Сценарий 5: Админ заходит в систему, и нанимает раннее зарегестрированного тестового пользователя,
-        // на желаемую им должность. Затем переходит на страницу работников, и удостоверяется, что пользователь
-        // получил должность и числится в системе как работяга.
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 5: ГЂГ¤Г¬ГЁГ­ Г§Г ГµГ®Г¤ГЁГІ Гў Г±ГЁГ±ГІГҐГ¬Гі, ГЁ Г­Г Г­ГЁГ¬Г ГҐГІ Г°Г Г­Г­ГҐГҐ Г§Г Г°ГҐГЈГҐГ±ГІГ°ГЁГ°Г®ГўГ Г­Г­Г®ГЈГ® ГІГҐГ±ГІГ®ГўГ®ГЈГ® ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї,
+        // Г­Г  Г¦ГҐГ«Г ГҐГ¬ГіГѕ ГЁГ¬ Г¤Г®Г«Г¦Г­Г®Г±ГІГј. Г‡Г ГІГҐГ¬ ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі Г°Г ГЎГ®ГІГ­ГЁГЄГ®Гў, ГЁ ГіГ¤Г®Г±ГІГ®ГўГҐГ°ГїГҐГІГ±Гї, Г·ГІГ® ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј
+        // ГЇГ®Г«ГіГ·ГЁГ« Г¤Г®Г«Г¦Г­Г®Г±ГІГј ГЁ Г·ГЁГ±Г«ГЁГІГ±Гї Гў Г±ГЁГ±ГІГҐГ¬ГҐ ГЄГ ГЄ Г°Г ГЎГ®ГІГїГЈГ .
 
         [Test]
         public void Test5_hire_user()
@@ -318,7 +318,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement hireCell = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement hireCell = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             hireCell.Click();
             string hireId = hireCell.GetAttribute("Value.Value");
 
@@ -329,7 +329,7 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             hiredCell.Click();
             string hiredId = hiredCell.GetAttribute("Value.Value");
 
@@ -339,9 +339,9 @@ namespace DataBaseHR.E2ETests
         }
         
 
-        //Сценарий 6: Пользователь заходит и убеждается, что его наняли на работу. Заходит в окно заявок,
-        // и оставляет 3 заявки. Подумав что 3 заявки будет много, последнюю из них удаляет. Убеждается в том, 
-        // что заявки появились в таблице заявок. 
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 6: ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј Г§Г ГµГ®Г¤ГЁГІ ГЁ ГіГЎГҐГ¦Г¤Г ГҐГІГ±Гї, Г·ГІГ® ГҐГЈГ® Г­Г Г­ГїГ«ГЁ Г­Г  Г°Г ГЎГ®ГІГі. Г‡Г ГµГ®Г¤ГЁГІ Гў Г®ГЄГ­Г® Г§Г ГїГўГ®ГЄ,
+        // ГЁ Г®Г±ГІГ ГўГ«ГїГҐГІ 3 Г§Г ГїГўГЄГЁ. ГЏГ®Г¤ГіГ¬Г Гў Г·ГІГ® 3 Г§Г ГїГўГЄГЁ ГЎГіГ¤ГҐГІ Г¬Г­Г®ГЈГ®, ГЇГ®Г±Г«ГҐГ¤Г­ГѕГѕ ГЁГ§ Г­ГЁГµ ГіГ¤Г Г«ГїГҐГІ. Г“ГЎГҐГ¦Г¤Г ГҐГІГ±Гї Гў ГІГ®Г¬, 
+        // Г·ГІГ® Г§Г ГїГўГЄГЁ ГЇГ®ГїГўГЁГ«ГЁГ±Гј Гў ГІГ ГЎГ«ГЁГ¶ГҐ Г§Г ГїГўГ®ГЄ. 
 
         [Test]
         public void Test6_make_requests()
@@ -381,11 +381,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Строка 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Г‘ГІГ°Г®ГЄГ  0");
             requestCell0.Click();
             string request0 = requestCell0.GetAttribute("Value.Value");
 
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Строка 1");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Г‘ГІГ°Г®ГЄГ  1");
             requestCell1.Click();
             string request1 = requestCell0.GetAttribute("Value.Value");
 
@@ -395,9 +395,9 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        //Сценарий 7: Админ заходит в систему, переходит на страницу заявок. Проверяет существующие заявки.
-        // Сортирует заявки по убыванию ID, выбирает первую заявку и отклоняет её. Затем выбирает вторую
-        // заявку и одобряет её. 
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 7: ГЂГ¤Г¬ГЁГ­ Г§Г ГµГ®Г¤ГЁГІ Гў Г±ГЁГ±ГІГҐГ¬Гі, ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі Г§Г ГїГўГ®ГЄ. ГЏГ°Г®ГўГҐГ°ГїГҐГІ Г±ГіГ№ГҐГ±ГІГўГіГѕГ№ГЁГҐ Г§Г ГїГўГЄГЁ.
+        // Г‘Г®Г°ГІГЁГ°ГіГҐГІ Г§Г ГїГўГЄГЁ ГЇГ® ГіГЎГ»ГўГ Г­ГЁГѕ ID, ГўГ»ГЎГЁГ°Г ГҐГІ ГЇГҐГ°ГўГіГѕ Г§Г ГїГўГЄГі ГЁ Г®ГІГЄГ«Г®Г­ГїГҐГІ ГҐВё. Г‡Г ГІГҐГ¬ ГўГ»ГЎГЁГ°Г ГҐГІ ГўГІГ®Г°ГіГѕ
+        // Г§Г ГїГўГЄГі ГЁ Г®Г¤Г®ГЎГ°ГїГҐГІ ГҐВё. 
 
         [Test]
         public void Test7_accept_and_decline_requests()
@@ -428,17 +428,17 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Строка 0");
+            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Г‘ГІГ°Г®ГЄГ  0");
             requestName0.Click();
             string request0 = requestName0.GetAttribute("Value.Value");
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Строка 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Г‘ГІГ°Г®ГЄГ  0");
             requestCell0.Click();
             disapproveButton.Click();
 
-            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Строка 0");
+            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Г‘ГІГ°Г®ГЄГ  0");
             requestName1.Click();
             string request1 = requestName1.GetAttribute("Value.Value");
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Строка 0");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Г‘ГІГ°Г®ГЄГ  0");
             requestCell1.Click();
             approveButton.Click();
 
@@ -448,10 +448,10 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
         
-        //Сценарий 8: Админ переходит на страницу вакансий, добавляет 2 новых вакансий по созданной должности.
-        //Проверяет наличие вакансии в таблице, затем добавляет еще 3 вакансии, проверяет, 
-        //что в таблице кол-во вакансий увеличилось на 3. Затем удаляет вакансии, переходит
-        //обратно на страницу должностей и удаляет должность. 
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 8: ГЂГ¤Г¬ГЁГ­ ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі ГўГ ГЄГ Г­Г±ГЁГ©, Г¤Г®ГЎГ ГўГ«ГїГҐГІ 2 Г­Г®ГўГ»Гµ ГўГ ГЄГ Г­Г±ГЁГ© ГЇГ® Г±Г®Г§Г¤Г Г­Г­Г®Г© Г¤Г®Г«Г¦Г­Г®Г±ГІГЁ.
+        //ГЏГ°Г®ГўГҐГ°ГїГҐГІ Г­Г Г«ГЁГ·ГЁГҐ ГўГ ГЄГ Г­Г±ГЁГЁ Гў ГІГ ГЎГ«ГЁГ¶ГҐ, Г§Г ГІГҐГ¬ Г¤Г®ГЎГ ГўГ«ГїГҐГІ ГҐГ№ГҐ 3 ГўГ ГЄГ Г­Г±ГЁГЁ, ГЇГ°Г®ГўГҐГ°ГїГҐГІ, 
+        //Г·ГІГ® Гў ГІГ ГЎГ«ГЁГ¶ГҐ ГЄГ®Г«-ГўГ® ГўГ ГЄГ Г­Г±ГЁГ© ГіГўГҐГ«ГЁГ·ГЁГ«Г®Г±Гј Г­Г  3. Г‡Г ГІГҐГ¬ ГіГ¤Г Г«ГїГҐГІ ГўГ ГЄГ Г­Г±ГЁГЁ, ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ
+        //Г®ГЎГ°Г ГІГ­Г® Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі Г¤Г®Г«Г¦Г­Г®Г±ГІГҐГ© ГЁ ГіГ¤Г Г«ГїГҐГІ Г¤Г®Г«Г¦Г­Г®Г±ГІГј. 
 
         [Test]
         public void Test8_add_delete_vacancy()
@@ -490,7 +490,7 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement count0 = DesktopSession.FindElementByName("Amount Строка 0");
+            WindowsElement count0 = DesktopSession.FindElementByName("Amount Г‘ГІГ°Г®ГЄГ  0");
             count0.Click();
             string numCount0 = count0.GetAttribute("Value.Value");
 
@@ -500,11 +500,11 @@ namespace DataBaseHR.E2ETests
             amountTextBox.SendKeys("3");
             addVacancyButton.Click();
 
-            WindowsElement count1 = DesktopSession.FindElementByName("Amount Строка 0");
+            WindowsElement count1 = DesktopSession.FindElementByName("Amount Г‘ГІГ°Г®ГЄГ  0");
             count1.Click();
             string numCount1 = count1.GetAttribute("Value.Value");
 
-            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
+            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Г‘ГІГ°Г®ГЄГ  0");
             vacancyToDelete.Click();
             deleteVacancyButton.Click();
 
@@ -517,9 +517,9 @@ namespace DataBaseHR.E2ETests
         }
         
 
-        //Сценарий 9: Пользователь заходит, переходит в окно запросов, 
-        // проверяет что в первом запросе ему отказали, а второй запрос ему одобрили.
-        // После проверки удаляет оба запроса и выходит из системы.
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 9: ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј Г§Г ГµГ®Г¤ГЁГІ, ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Гў Г®ГЄГ­Г® Г§Г ГЇГ°Г®Г±Г®Гў, 
+        // ГЇГ°Г®ГўГҐГ°ГїГҐГІ Г·ГІГ® Гў ГЇГҐГ°ГўГ®Г¬ Г§Г ГЇГ°Г®Г±ГҐ ГҐГ¬Гі Г®ГІГЄГ Г§Г Г«ГЁ, Г  ГўГІГ®Г°Г®Г© Г§Г ГЇГ°Г®Г± ГҐГ¬Гі Г®Г¤Г®ГЎГ°ГЁГ«ГЁ.
+        // ГЏГ®Г±Г«ГҐ ГЇГ°Г®ГўГҐГ°ГЄГЁ ГіГ¤Г Г«ГїГҐГІ Г®ГЎГ  Г§Г ГЇГ°Г®Г±Г  ГЁ ГўГ»ГµГ®Г¤ГЁГІ ГЁГ§ Г±ГЁГ±ГІГҐГ¬Г».
 
         [Test]
         public void Test9_check_and_delete_requests()
@@ -544,19 +544,19 @@ namespace DataBaseHR.E2ETests
             requestButton.Click();
             WindowsElement deleteButton = DesktopSession.FindElementByAccessibilityId("deleteButton");
 
-            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Строка 0");
+            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Г‘ГІГ°Г®ГЄГ  0");
             approval0.Click();
             string approvalValue0 = approval0.GetAttribute("Value.Value");
 
-            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Строка 1");
+            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Г‘ГІГ°Г®ГЄГ  1");
             approval1.Click();
             string approvalValue1 = approval1.GetAttribute("Value.Value");
 
-            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             requestToDelete0.Click();
             deleteButton.Click();
 
-            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             requestToDelete1.Click();
             deleteButton.Click();
 
@@ -566,9 +566,9 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        //Сценарий 10: Админ заходит в систему, переходит на страницу должностей, удаляет должность newpost.
-        //Затем переходит в окно работников изменяет должность выбранного пользователя. Убеждается что должность
-        // изменилась. После чего увольняет тестового пользователя и выходит из системы.
+        //Г‘Г¶ГҐГ­Г Г°ГЁГ© 10: ГЂГ¤Г¬ГЁГ­ Г§Г ГµГ®Г¤ГЁГІ Гў Г±ГЁГ±ГІГҐГ¬Гі, ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі Г¤Г®Г«Г¦Г­Г®Г±ГІГҐГ©, ГіГ¤Г Г«ГїГҐГІ Г¤Г®Г«Г¦Г­Г®Г±ГІГј newpost.
+        //Г‡Г ГІГҐГ¬ ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ Гў Г®ГЄГ­Г® Г°Г ГЎГ®ГІГ­ГЁГЄГ®Гў ГЁГ§Г¬ГҐГ­ГїГҐГІ Г¤Г®Г«Г¦Г­Г®Г±ГІГј ГўГ»ГЎГ°Г Г­Г­Г®ГЈГ® ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї. Г“ГЎГҐГ¦Г¤Г ГҐГІГ±Гї Г·ГІГ® Г¤Г®Г«Г¦Г­Г®Г±ГІГј
+        // ГЁГ§Г¬ГҐГ­ГЁГ«Г Г±Гј. ГЏГ®Г±Г«ГҐ Г·ГҐГЈГ® ГіГўГ®Г«ГјГ­ГїГҐГІ ГІГҐГ±ГІГ®ГўГ®ГЈГ® ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї ГЁ ГўГ»ГµГ®Г¤ГЁГІ ГЁГ§ Г±ГЁГ±ГІГҐГ¬Г».
 
         [Test]
         public void Test9_delete_post_fire_user()
@@ -598,7 +598,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
+            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Г‘ГІГ°Г®ГЄГ  0");
             postToDelete.Click();
             deletePostButton.Click();
 
@@ -611,21 +611,21 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement userToChange = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement userToChange = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             userToChange.Click();
             workerChangeComboBox.Click();
-            workerChangeComboBox.FindElementByName("Секретарь").Click();
+            workerChangeComboBox.FindElementByName("Г‘ГҐГЄГ°ГҐГІГ Г°Гј").Click();
             workerChangeButton.Click();
 
             SortButton2.Click();
             SortButton2.Click();
-            WindowsElement changedPost = DesktopSession.FindElementByName("Post Строка 0");
+            WindowsElement changedPost = DesktopSession.FindElementByName("Post Г‘ГІГ°Г®ГЄГ  0");
             string changedPostValue = changedPost.GetAttribute("Value.Value");
-            WindowsElement userToFire = DesktopSession.FindElementByName("ID Строка 0");
+            WindowsElement userToFire = DesktopSession.FindElementByName("ID Г‘ГІГ°Г®ГЄГ  0");
             userToFire.Click();
             fireButton.Click();
 
-            Assert.AreEqual(changedPostValue, "Секретарь");
+            Assert.AreEqual(changedPostValue, "Г‘ГҐГЄГ°ГҐГІГ Г°Гј");
             DesktopSession.Close();
             DesktopSession.Quit();
         }
