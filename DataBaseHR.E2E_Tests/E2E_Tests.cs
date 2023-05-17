@@ -11,6 +11,7 @@ namespace DataBaseHR.E2ETests
 {
     public class Tests
     {
+
         /*
         public const string DriverUrl = "http://127.0.0.1:4723/";
         public WindowsDriver<WindowsElement> DesktopSession;
@@ -25,12 +26,14 @@ namespace DataBaseHR.E2ETests
         }
         */
 
+
+
         public const string DriverUrl = "http://188.134.88.224:4723/";
         public WindowsDriver<WindowsElement> DesktopSession;
         [SetUp]
         public void Setup()
         {
-            SftpClient sftpClient = new SftpClient("188.134.88.224:4723", 22, "Walker", "LiMingHao");
+            SftpClient sftpClient = new SftpClient("188.134.88.224", 22, "Walker", "LiMingHao");
             try
             {
                 sftpClient.Connect();
@@ -48,6 +51,7 @@ namespace DataBaseHR.E2ETests
             DesktopSession = new WindowsDriver<WindowsElement>(new Uri(DriverUrl), Options);
             Assert.IsNotNull(DesktopSession);
         }
+        
 
         // Сценарий 1: Пользователь хочет создать аккаунт. Запускает приложение, нажимает на кнопку регистрации,
         // перодит в окно регистрации, вводит логин и пароль, нажимает зарегестрироваться. Совершает попытку входа

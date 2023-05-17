@@ -82,11 +82,8 @@ namespace DataBaseHR
 
         private void MakeRequestForm_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "requestTypeDataSet.requestTypeTable". При необходимости она может быть перемещена или удалена.
-            this.requestTypeTableTableAdapter1.Fill(this.requestTypeDataSet.requestTypeTable);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet4.requestTypeTable". При необходимости она может быть перемещена или удалена.
-            this.requestTypeTableTableAdapter.Fill(this.dataSet4.requestTypeTable);
             showData();
+            this.requestTypeTableTableAdapter1.Fill(this.requestTypeDataSet.requestTypeTable);
         }
     }
 }

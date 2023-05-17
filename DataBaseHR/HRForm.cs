@@ -25,17 +25,12 @@ namespace DataBaseHR
 
         private void HRForm_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "vacanciesDataSet.postTable". При необходимости она может быть перемещена или удалена.
-            this.postTableTableAdapter1.Fill(this.vacanciesDataSet.postTable);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet3.postTable". При необходимости она может быть перемещена или удалена.
-            this.postTableTableAdapter.Fill(this.dataSet3.postTable);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet3.postTable". При необходимости она может быть перемещена или удалена.
-            this.postTableTableAdapter.Fill(this.dataSet3.postTable);
+            updateWorkerInfo();
+            this.postTableTableAdapter.Fill(this.hRDDataSet.postTable);
             foreach (Control c in this.Controls)
             {
                 if (c is Panel) c.Visible = false;
             }
-            updateWorkerInfo();
             panel1.Show();
         }
 
