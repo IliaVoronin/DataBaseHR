@@ -117,7 +117,7 @@ namespace DataBaseHR.E2ETests
             countryBox.SendKeys(testCountry);
             WindowsElement postBox = DesktopSession.FindElementByAccessibilityId("postBox");
             postBox.Click();
-            postBox.FindElementByName("Óáîðùèê").Click();
+            postBox.FindElementByName("Уборщик").Click();
 
 
             WindowsElement saveButton = DesktopSession.FindElementByAccessibilityId("saveButton");
@@ -270,11 +270,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Ñòðîêà 0");
+            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Строка 0");
             postNameCell.Click();
             string postName = postNameCell.GetAttribute("Value.Value");
 
-            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Строка 0");
             postToChange.Click();
 
             newSalaryTextBox.SendKeys("1010");
@@ -322,7 +322,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement hireCell = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement hireCell = DesktopSession.FindElementByName("ID Строка 0");
             hireCell.Click();
             string hireId = hireCell.GetAttribute("Value.Value");
 
@@ -333,7 +333,7 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Строка 0");
             hiredCell.Click();
             string hiredId = hiredCell.GetAttribute("Value.Value");
 
@@ -385,11 +385,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Строка 0");
             requestCell0.Click();
             string request0 = requestCell0.GetAttribute("Value.Value");
 
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Ñòðîêà 1");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Строка 1");
             requestCell1.Click();
             string request1 = requestCell0.GetAttribute("Value.Value");
 
@@ -432,17 +432,17 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Строка 0");
             requestName0.Click();
             string request0 = requestName0.GetAttribute("Value.Value");
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Ñòðîêà 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Строка 0");
             requestCell0.Click();
             disapproveButton.Click();
 
-            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Строка 0");
             requestName1.Click();
             string request1 = requestName1.GetAttribute("Value.Value");
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Ñòðîêà 0");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Строка 0");
             requestCell1.Click();
             approveButton.Click();
 
@@ -494,7 +494,7 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement count0 = DesktopSession.FindElementByName("Amount Ñòðîêà 0");
+            WindowsElement count0 = DesktopSession.FindElementByName("Amount Строка 0");
             count0.Click();
             string numCount0 = count0.GetAttribute("Value.Value");
 
@@ -504,11 +504,11 @@ namespace DataBaseHR.E2ETests
             amountTextBox.SendKeys("3");
             addVacancyButton.Click();
 
-            WindowsElement count1 = DesktopSession.FindElementByName("Amount Ñòðîêà 0");
+            WindowsElement count1 = DesktopSession.FindElementByName("Amount Строка 0");
             count1.Click();
             string numCount1 = count1.GetAttribute("Value.Value");
 
-            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
             vacancyToDelete.Click();
             deleteVacancyButton.Click();
 
@@ -548,19 +548,19 @@ namespace DataBaseHR.E2ETests
             requestButton.Click();
             WindowsElement deleteButton = DesktopSession.FindElementByAccessibilityId("deleteButton");
 
-            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Ñòðîêà 0");
+            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Строка 0");
             approval0.Click();
             string approvalValue0 = approval0.GetAttribute("Value.Value");
 
-            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Ñòðîêà 1");
+            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Строка 1");
             approval1.Click();
             string approvalValue1 = approval1.GetAttribute("Value.Value");
 
-            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Строка 0");
             requestToDelete0.Click();
             deleteButton.Click();
 
-            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Строка 0");
             requestToDelete1.Click();
             deleteButton.Click();
 
@@ -602,7 +602,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
             postToDelete.Click();
             deletePostButton.Click();
 
@@ -615,21 +615,21 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement userToChange = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement userToChange = DesktopSession.FindElementByName("ID Строка 0");
             userToChange.Click();
             workerChangeComboBox.Click();
-            workerChangeComboBox.FindElementByName("Ñåêðåòàðü").Click();
+            workerChangeComboBox.FindElementByName("Секретарь").Click();
             workerChangeButton.Click();
 
             SortButton2.Click();
             SortButton2.Click();
-            WindowsElement changedPost = DesktopSession.FindElementByName("Post Ñòðîêà 0");
+            WindowsElement changedPost = DesktopSession.FindElementByName("Post Строка 0");
             string changedPostValue = changedPost.GetAttribute("Value.Value");
-            WindowsElement userToFire = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement userToFire = DesktopSession.FindElementByName("ID Строка 0");
             userToFire.Click();
             fireButton.Click();
 
-            Assert.AreEqual(changedPostValue, "Ñåêðåòàðü");
+            Assert.AreEqual(changedPostValue, "Секретарь");
             DesktopSession.Close();
             DesktopSession.Quit();
         }
