@@ -35,7 +35,7 @@ jobs:
       - name: Setup VSTest.console.exe
         uses: darenm/Setup-VSTest@v1
         
-      - name: Running Integration tests
+      - name: Running Int tests
         working-directory: ./DataBaseHR.Int_Tests/bin/Debug
         shell: powershell
         run: vstest.console.exe DataBaseHR.Int_Tests.dll /Platform:x64
