@@ -24,7 +24,6 @@ namespace DataBaseHR.E2ETests
             DesktopSession = new WindowsDriver<WindowsElement>(new Uri(DriverUrl), Options);
             Assert.IsNotNull(DesktopSession);
         }
-        
         */
 
         public const string DriverUrl = "http://188.134.88.224:4723/";
