@@ -23,15 +23,20 @@ namespace DataBaseHR.Int_Tests
 
             workerForm.saveButton_logic(name, surname, sex, mail, date, country, userid);
             var infoTable = DBUtils.Select(String.Format("SELECT * FROM infoTable WHERE infoUserId = {0}", userid));
+
             string resultName = (string)infoTable[0][2];
             string resultSurname = (string)infoTable[0][3];
             string resultSex = (string)infoTable[0][4];
             string resultEmail = (string)infoTable[0][5];
+            string resultDate = (string)infoTable[0][6];
+            string resultCountry = (string)infoTable[0][7];
 
             Assert.AreEqual(name, resultName);
             Assert.AreEqual(surname, resultSurname);
             Assert.AreEqual(sex, resultSex);
             Assert.AreEqual(mail, resultEmail);
+            Assert.AreEqual(date, resultDate);
+            Assert.AreEqual(country, resultCountry);
         }
 
         [TestMethod]

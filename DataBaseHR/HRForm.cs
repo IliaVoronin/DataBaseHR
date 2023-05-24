@@ -115,10 +115,11 @@ namespace DataBaseHR
 
         private void declineButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in this.newbiesGridView.SelectedRows)
+            foreach (DataGridViewCell item in this.newbiesGridView.SelectedCells)
             {
-                newbiesGridView.Rows.RemoveAt(item.Index);
-                deleteRow((int)item.Cells[0].Value);
+                //newbiesGridView.Rows.RemoveAt(item.Index);
+                deleteRow((int)item.Value);
+                updateNewbieInfo();
             }
         }
 

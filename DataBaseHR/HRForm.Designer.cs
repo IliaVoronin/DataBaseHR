@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.workerChangeComboBox = new System.Windows.Forms.ComboBox();
-            this.postTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.vacanciesDataSet = new DataBaseHR.vacanciesDataSet();
+            this.postTableBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.hRDDataSet = new DataBaseHR.HRDDataSet();
             this.label6 = new System.Windows.Forms.Label();
             this.workerChangeButton = new System.Windows.Forms.Button();
             this.fireButton = new System.Windows.Forms.Button();
@@ -45,6 +45,8 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.postTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.vacanciesDataSet = new DataBaseHR.vacanciesDataSet();
             this.postTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workersButton = new System.Windows.Forms.Button();
             this.newbiesButton = new System.Windows.Forms.Button();
@@ -99,13 +101,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.postTableTableAdapter1 = new DataBaseHR.vacanciesDataSetTableAdapters.postTableTableAdapter();
-            this.hRDDataSet = new DataBaseHR.HRDDataSet();
-            this.postTableBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.postTableTableAdapter = new DataBaseHR.HRDDataSetTableAdapters.postTableTableAdapter();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hRDDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.workerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vacanciesDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.workerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.newbiesGridView)).BeginInit();
@@ -115,8 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.vacanciesGridView)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hRDDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -143,15 +143,15 @@
             this.workerChangeComboBox.TabIndex = 9;
             this.workerChangeComboBox.ValueMember = "postId";
             // 
-            // postTableBindingSource1
+            // postTableBindingSource2
             // 
-            this.postTableBindingSource1.DataMember = "postTable";
-            this.postTableBindingSource1.DataSource = this.vacanciesDataSet;
+            this.postTableBindingSource2.DataMember = "postTable";
+            this.postTableBindingSource2.DataSource = this.hRDDataSet;
             // 
-            // vacanciesDataSet
+            // hRDDataSet
             // 
-            this.vacanciesDataSet.DataSetName = "vacanciesDataSet";
-            this.vacanciesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.hRDDataSet.DataSetName = "HRDDataSet";
+            this.hRDDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label6
             // 
@@ -240,6 +240,16 @@
             // 
             this.Column6.HeaderText = "Country";
             this.Column6.Name = "Column6";
+            // 
+            // postTableBindingSource1
+            // 
+            this.postTableBindingSource1.DataMember = "postTable";
+            this.postTableBindingSource1.DataSource = this.vacanciesDataSet;
+            // 
+            // vacanciesDataSet
+            // 
+            this.vacanciesDataSet.DataSetName = "vacanciesDataSet";
+            this.vacanciesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // workersButton
             // 
@@ -679,16 +689,6 @@
             // 
             this.postTableTableAdapter1.ClearBeforeFill = true;
             // 
-            // hRDDataSet
-            // 
-            this.hRDDataSet.DataSetName = "HRDDataSet";
-            this.hRDDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // postTableBindingSource2
-            // 
-            this.postTableBindingSource2.DataMember = "postTable";
-            this.postTableBindingSource2.DataSource = this.hRDDataSet;
-            // 
             // postTableTableAdapter
             // 
             this.postTableTableAdapter.ClearBeforeFill = true;
@@ -703,19 +703,21 @@
             this.Controls.Add(this.requstsButton);
             this.Controls.Add(this.newbiesButton);
             this.Controls.Add(this.workersButton);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel5);
             this.Name = "HRForm";
             this.Text = "DirectorForm";
             this.Load += new System.EventHandler(this.HRForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hRDDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.workerGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vacanciesDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.workerGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.newbiesGridView)).EndInit();
@@ -727,8 +729,6 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hRDDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.postTableBindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }

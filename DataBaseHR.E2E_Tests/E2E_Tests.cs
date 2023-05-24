@@ -26,8 +26,6 @@ namespace DataBaseHR.E2ETests
         }
         */
 
-
-
         public const string DriverUrl = "http://188.134.88.224:4723/";
         public WindowsDriver<WindowsElement> DesktopSession;
         [SetUp]
@@ -53,14 +51,14 @@ namespace DataBaseHR.E2ETests
         }
         
 
-        // Ñöåíàðèé 1: Ïîëüçîâàòåëü õî÷åò ñîçäàòü àêêàóíò. Çàïóñêàåò ïðèëîæåíèå, íàæèìàåò íà êíîïêó ðåãèñòðàöèè,
-        // ïåðîäèò â îêíî ðåãèñòðàöèè, ââîäèò ëîãèí è ïàðîëü, íàæèìàåò çàðåãåñòðèðîâàòüñÿ. Ñîâåðøàåò ïîïûòêó âõîäà
-        // â ñèñòåìó, âõîä âûïîëíåí. Òàê æå õî÷åò èçìåíèòü äàííûå î ñåáå, íàæèìàåò êíîïêó "èçìåíèòü äàííûå",
-        // ïåðåõîäèò â îêíî èçìåíåíèÿ äàííûõ, ââîäèò íîâûå äàííûå, íàæèìàåò ñîõðàíèòü èçìåíåíèÿ. Âîçâðàùàåòñÿ 
-        // íà ãëàâíûé ýêðàí, âèäèò ÷òî äàííûå ñîõðàíèëèñü. 
+        // Сценарий 1: Пользователь хочет создать аккаунт. Запускает приложение, нажимает на кнопку регистрации,
+        // перодит в окно регистрации, вводит логин и пароль, нажимает зарегестрироваться. Совершает попытку входа
+        // в систему, вход выполнен. Так же хочет изменить данные о себе, нажимает кнопку "изменить данные",
+        // переходит в окно изменения данных, вводит новые данные, нажимает сохранить изменения. Возвращается 
+        // на главный экран, видит что данные сохранились. 
 
         [Test]
-        public void Test1_register()
+        public void Test0_register()
         {
             String testLogin = "test1";
             String testPassword = "12345";
@@ -117,7 +115,7 @@ namespace DataBaseHR.E2ETests
             countryBox.SendKeys(testCountry);
             WindowsElement postBox = DesktopSession.FindElementByAccessibilityId("postBox");
             postBox.Click();
-            postBox.FindElementByName("Óáîðùèê").Click();
+            postBox.FindElementByName("Уборщик").Click();
 
 
             WindowsElement saveButton = DesktopSession.FindElementByAccessibilityId("saveButton");
@@ -143,13 +141,14 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        
 
-        // Ñöåíàðèé 2: Ïîëüçîâàòåëü õî÷åò âîéòè â ñèñòåìó íî ââîäèò íå ïðàâèëüíûé ïàðîëü, ïîëó÷àåòñÿ ñîîòâåòñòâóþùóþ îøèáêó,
-        // çàêðûâàåò å¸, ââîäèò ïàðîëü è óñïåøíî âõîäèò â ñèñòåìó.
+        // Сценарий 2: Пользователь хочет войти в систему но вводит не правильный пароль, получается соответствующую ошибку,
+        // закрывает ее.
+        // Пользователь пытается войти, забыв указать одно из полей, получает ошибку о том,
+        // что не запролнил все поля, закрывает ее, заново вводит данные и успешно входит в систему.
 
         [Test]
-        public void Test2_wrong_password()
+        public void Test1_wrong_password()
         {
             String testLogin = "test1";
             String testPassword = "12345";
@@ -168,14 +167,22 @@ namespace DataBaseHR.E2ETests
             var allWindowHandles = DesktopSession.WindowHandles;
             DesktopSession.SwitchTo().Window(allWindowHandles[0]);
 
-            WindowsElement ErrorBar = DesktopSession.FindElementByAccessibilityId("65535");
-            string ActErrorText = ErrorBar.GetAttribute("Name");
-            Console.WriteLine(ActErrorText);
+            WindowsElement ErrorBar1 = DesktopSession.FindElementByAccessibilityId("65535");
+            string ActErrorText1 = ErrorBar1.GetAttribute("Name");
 
-            WindowsElement AcceptClick = DesktopSession.FindElementByAccessibilityId("2");
-            AcceptClick.Click();
+            WindowsElement AcceptClick1 = DesktopSession.FindElementByAccessibilityId("2");
+            AcceptClick1.Click();
 
-            Assert.AreEqual("User is undefined!", ActErrorText);
+            loginTextBox.Clear();
+            loginTextBox.SendKeys(testLogin);
+            passwordTextBox.Clear();
+            loginButton.Click();
+
+            WindowsElement ErrorBar2 = DesktopSession.FindElementByAccessibilityId("65535");
+            string ActErrorText2 = ErrorBar2.GetAttribute("Name");
+
+            WindowsElement AcceptClick2 = DesktopSession.FindElementByAccessibilityId("2");
+            AcceptClick2.Click();
 
             loginTextBox.Clear();
             loginTextBox.SendKeys(testLogin);
@@ -183,56 +190,17 @@ namespace DataBaseHR.E2ETests
             passwordTextBox.SendKeys(testPassword);
             loginButton.Click();
 
-            Assert.Pass();
+            Assert.AreEqual("User is undefined!", ActErrorText1);
+            Assert.AreEqual("Enter login and password", ActErrorText2);
             DesktopSession.Close();
             DesktopSession.Quit();
         }
 
-        // Ñöåíàðèé 3: Ïîëüçîâàòåëü ïûòàåòñÿ âîéòè, çàáûâ óêàçàòü îäíî èç ïîëåé, ïîëó÷àåò îøèáêó î òîì, 
-        // ÷òî íå çàïðîëíèë âñå ïîëÿ, çàêðûâàåò å¸, çàíîâî ââîäèò äàííûå è óñïåøíî âõîäèò â ñèñòåìó
+        //Сценарий 3: Администратор должен зайти в приложение, перейти во вкладку профессий,
+        // добавить профессию, изменить е  зарплату
 
         [Test]
-        public void Test3_no_data()
-        {
-            String testLogin = "test1";
-            String testPassword = "12345";
-
-            WindowsElement loginTextBox = DesktopSession.FindElementByAccessibilityId("loginTextBox");
-            WindowsElement passwordTextBox = DesktopSession.FindElementByAccessibilityId("passwordTextBox");
-            WindowsElement loginButton = DesktopSession.FindElementByAccessibilityId("loginButton");
-
-            loginTextBox.SendKeys(testLogin);
-            loginButton.Click();
-
-            Thread.Sleep(TimeSpan.FromSeconds(1));
-
-            var allWindowHandles = DesktopSession.WindowHandles;
-            DesktopSession.SwitchTo().Window(allWindowHandles[0]);
-
-            WindowsElement ErrorBar = DesktopSession.FindElementByAccessibilityId("65535");
-            string ActErrorText = ErrorBar.GetAttribute("Name");
-
-            WindowsElement AcceptClick = DesktopSession.FindElementByAccessibilityId("2");
-            AcceptClick.Click();
-
-            loginTextBox.Clear();
-            loginTextBox.SendKeys(testLogin);
-            passwordTextBox.Clear();
-            passwordTextBox.SendKeys(testPassword);
-            loginButton.Click();
-
-            
-            Assert.AreEqual("Enter login and password", ActErrorText);
-            DesktopSession.Close();
-            DesktopSession.Quit();
-        }
-
-
-        //Ñöåíàðèé 4: Àäìèíèñòðàòîð äîëæåí çàéòè â ïðèëîæåíèå, ïåðåéòè âî âêëàäêó ïðîôåññèé,
-        // äîáàâèòü ïðîôåññèþ, èçìåíèòü å¸ çàðïëàòó
-
-        [Test]
-        public void Test4_add_change_delete_post()
+        public void Test2_add_change_delete_post()
         {
             String testLogin = "hr";
             String testPassword = "12345";
@@ -270,11 +238,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Ñòðîêà 0");
+            WindowsElement postNameCell = DesktopSession.FindElementByName("Post Строка 0");
             postNameCell.Click();
             string postName = postNameCell.GetAttribute("Value.Value");
 
-            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement postToChange = DesktopSession.FindElementByName("Post ID Строка 0");
             postToChange.Click();
 
             newSalaryTextBox.SendKeys("1010");
@@ -287,15 +255,15 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
             Assert.AreEqual(postName, "newpost");
         }
-        
-        
 
-        //Ñöåíàðèé 5: Àäìèí çàõîäèò â ñèñòåìó, è íàíèìàåò ðàííåå çàðåãåñòðèðîâàííîãî òåñòîâîãî ïîëüçîâàòåëÿ,
-        // íà æåëàåìóþ èì äîëæíîñòü. Çàòåì ïåðåõîäèò íà ñòðàíèöó ðàáîòíèêîâ, è óäîñòîâåðÿåòñÿ, ÷òî ïîëüçîâàòåëü
-        // ïîëó÷èë äîëæíîñòü è ÷èñëèòñÿ â ñèñòåìå êàê ðàáîòÿãà.
+
+
+        //Сценарий 4: Админ заходит в систему, и нанимает раннее зарегестрированного тестового пользователя,
+        // на желаемую им должность. Затем переходит на страницу работников, и удостоверяется, что пользователь
+        // получил должность и числится в системе как работяга.
 
         [Test]
-        public void Test5_hire_user()
+        public void Test3_hire_user()
         {
             String testLogin = "hr";
             String testPassword = "12345";
@@ -322,7 +290,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement hireCell = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement hireCell = DesktopSession.FindElementByName("ID Строка 0");
             hireCell.Click();
             string hireId = hireCell.GetAttribute("Value.Value");
 
@@ -333,7 +301,7 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement hiredCell = DesktopSession.FindElementByName("ID Строка 0");
             hiredCell.Click();
             string hiredId = hiredCell.GetAttribute("Value.Value");
 
@@ -341,14 +309,14 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
             Assert.AreEqual(hireId, hiredId);
         }
-        
 
-        //Ñöåíàðèé 6: Ïîëüçîâàòåëü çàõîäèò è óáåæäàåòñÿ, ÷òî åãî íàíÿëè íà ðàáîòó. Çàõîäèò â îêíî çàÿâîê,
-        // è îñòàâëÿåò 3 çàÿâêè. Ïîäóìàâ ÷òî 3 çàÿâêè áóäåò ìíîãî, ïîñëåäíþþ èç íèõ óäàëÿåò. Óáåæäàåòñÿ â òîì, 
-        // ÷òî çàÿâêè ïîÿâèëèñü â òàáëèöå çàÿâîê. 
+
+        //Сценарий 5: Пользователь заходит и убеждается, что его наняли на работу. Заходит в окно заявок,
+        // и оставляет 3 заявки. Подумав что 3 заявки будет много, последнюю из них удаляет. Убеждается в том, 
+        // что заявки появились в таблице заявок. 
 
         [Test]
-        public void Test6_make_requests()
+        public void Test4_make_requests()
         {
             String testLogin = "test1";
             String testPassword = "12345";
@@ -385,11 +353,11 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Name Строка 0");
             requestCell0.Click();
             string request0 = requestCell0.GetAttribute("Value.Value");
 
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Ñòðîêà 1");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Name Строка 1");
             requestCell1.Click();
             string request1 = requestCell0.GetAttribute("Value.Value");
 
@@ -399,12 +367,12 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        //Ñöåíàðèé 7: Àäìèí çàõîäèò â ñèñòåìó, ïåðåõîäèò íà ñòðàíèöó çàÿâîê. Ïðîâåðÿåò ñóùåñòâóþùèå çàÿâêè.
-        // Ñîðòèðóåò çàÿâêè ïî óáûâàíèþ ID, âûáèðàåò ïåðâóþ çàÿâêó è îòêëîíÿåò å¸. Çàòåì âûáèðàåò âòîðóþ
-        // çàÿâêó è îäîáðÿåò å¸. 
+        //Сценарий 6: Админ заходит в систему, переходит на страницу заявок. Проверяет существующие заявки.
+        // Сортирует заявки по убыванию ID, выбирает первую заявку и отклоняет е . Затем выбирает вторую
+        // заявку и одобряет е . 
 
         [Test]
-        public void Test7_accept_and_decline_requests()
+        public void Test5_accept_and_decline_requests()
         {
             String testLogin = "hr";
             String testPassword = "12345";
@@ -432,17 +400,17 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestName0 = DesktopSession.FindElementByName("Name Строка 0");
             requestName0.Click();
             string request0 = requestName0.GetAttribute("Value.Value");
-            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Ñòðîêà 0");
+            WindowsElement requestCell0 = DesktopSession.FindElementByName("Request ID Строка 0");
             requestCell0.Click();
             disapproveButton.Click();
 
-            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Ñòðîêà 0");
+            WindowsElement requestName1 = DesktopSession.FindElementByName("Name Строка 0");
             requestName1.Click();
             string request1 = requestName1.GetAttribute("Value.Value");
-            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Ñòðîêà 0");
+            WindowsElement requestCell1 = DesktopSession.FindElementByName("Request ID Строка 0");
             requestCell1.Click();
             approveButton.Click();
 
@@ -451,14 +419,14 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Close();
             DesktopSession.Quit();
         }
-        
-        //Ñöåíàðèé 8: Àäìèí ïåðåõîäèò íà ñòðàíèöó âàêàíñèé, äîáàâëÿåò 2 íîâûõ âàêàíñèé ïî ñîçäàííîé äîëæíîñòè.
-        //Ïðîâåðÿåò íàëè÷èå âàêàíñèè â òàáëèöå, çàòåì äîáàâëÿåò åùå 3 âàêàíñèè, ïðîâåðÿåò, 
-        //÷òî â òàáëèöå êîë-âî âàêàíñèé óâåëè÷èëîñü íà 3. Çàòåì óäàëÿåò âàêàíñèè, ïåðåõîäèò
-        //îáðàòíî íà ñòðàíèöó äîëæíîñòåé è óäàëÿåò äîëæíîñòü. 
+
+        //Сценарий 7: Админ переходит на страницу вакансий, добавляет 2 новых вакансий по созданной должности.
+        //Проверяет наличие вакансии в таблице, затем добавляет еще 3 вакансии, проверяет, 
+        //что в таблице кол-во вакансий увеличилось на 3. Затем удаляет вакансии, переходит
+        //обратно на страницу должностей и удаляет должность.
 
         [Test]
-        public void Test8_add_delete_vacancy()
+        public void Test6_add_delete_vacancy()
         {
             String testLogin = "hr";
             String testPassword = "12345";
@@ -494,7 +462,7 @@ namespace DataBaseHR.E2ETests
             sortButton.Click();
             sortButton.Click();
 
-            WindowsElement count0 = DesktopSession.FindElementByName("Amount Ñòðîêà 0");
+            WindowsElement count0 = DesktopSession.FindElementByName("Amount Строка 0");
             count0.Click();
             string numCount0 = count0.GetAttribute("Value.Value");
 
@@ -504,11 +472,11 @@ namespace DataBaseHR.E2ETests
             amountTextBox.SendKeys("3");
             addVacancyButton.Click();
 
-            WindowsElement count1 = DesktopSession.FindElementByName("Amount Ñòðîêà 0");
+            WindowsElement count1 = DesktopSession.FindElementByName("Amount Строка 0");
             count1.Click();
             string numCount1 = count1.GetAttribute("Value.Value");
 
-            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement vacancyToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
             vacancyToDelete.Click();
             deleteVacancyButton.Click();
 
@@ -519,14 +487,14 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Close();
             DesktopSession.Quit();
         }
-        
 
-        //Ñöåíàðèé 9: Ïîëüçîâàòåëü çàõîäèò, ïåðåõîäèò â îêíî çàïðîñîâ, 
-        // ïðîâåðÿåò ÷òî â ïåðâîì çàïðîñå åìó îòêàçàëè, à âòîðîé çàïðîñ åìó îäîáðèëè.
-        // Ïîñëå ïðîâåðêè óäàëÿåò îáà çàïðîñà è âûõîäèò èç ñèñòåìû.
+
+        //Сценарий 8: Пользователь заходит, переходит в окно запросов, 
+        // проверяет что в первом запросе ему отказали, а второй запрос ему одобрили.
+        // После проверки удаляет оба запроса и выходит из системы.
 
         [Test]
-        public void Test9_check_and_delete_requests()
+        public void Test7_check_and_delete_requests()
         {
             String testLogin = "test1";
             String testPassword = "12345";
@@ -548,19 +516,19 @@ namespace DataBaseHR.E2ETests
             requestButton.Click();
             WindowsElement deleteButton = DesktopSession.FindElementByAccessibilityId("deleteButton");
 
-            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Ñòðîêà 0");
+            WindowsElement approval0 = DesktopSession.FindElementByName("Approval Строка 0");
             approval0.Click();
             string approvalValue0 = approval0.GetAttribute("Value.Value");
 
-            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Ñòðîêà 1");
+            WindowsElement approval1 = DesktopSession.FindElementByName("Approval Строка 1");
             approval1.Click();
             string approvalValue1 = approval1.GetAttribute("Value.Value");
 
-            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement requestToDelete0 = DesktopSession.FindElementByName("ID Строка 0");
             requestToDelete0.Click();
             deleteButton.Click();
 
-            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement requestToDelete1 = DesktopSession.FindElementByName("ID Строка 0");
             requestToDelete1.Click();
             deleteButton.Click();
 
@@ -570,12 +538,12 @@ namespace DataBaseHR.E2ETests
             DesktopSession.Quit();
         }
 
-        //Ñöåíàðèé 10: Àäìèí çàõîäèò â ñèñòåìó, ïåðåõîäèò íà ñòðàíèöó äîëæíîñòåé, óäàëÿåò äîëæíîñòü newpost.
-        //Çàòåì ïåðåõîäèò â îêíî ðàáîòíèêîâ èçìåíÿåò äîëæíîñòü âûáðàííîãî ïîëüçîâàòåëÿ. Óáåæäàåòñÿ ÷òî äîëæíîñòü
-        // èçìåíèëàñü. Ïîñëå ÷åãî óâîëüíÿåò òåñòîâîãî ïîëüçîâàòåëÿ è âûõîäèò èç ñèñòåìû.
+        //Сценарий 9: Админ заходит в систему, переходит на страницу должностей, удаляет должность newpost.
+        //Затем переходит в окно работников изменяет должность выбранного пользователя. Убеждается что должность
+        // изменилась. После чего увольняет тестового пользователя и выходит из системы.
 
         [Test]
-        public void Test9_delete_post_fire_user()
+        public void Test8_delete_post_fire_user()
         {
             String testLogin = "hr";
             String testPassword = "12345";
@@ -602,7 +570,7 @@ namespace DataBaseHR.E2ETests
             SortButton.Click();
             SortButton.Click();
 
-            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Ñòðîêà 0");
+            WindowsElement postToDelete = DesktopSession.FindElementByName("Post ID Строка 0");
             postToDelete.Click();
             deletePostButton.Click();
 
@@ -615,21 +583,118 @@ namespace DataBaseHR.E2ETests
             SortButton2.Click();
             SortButton2.Click();
 
-            WindowsElement userToChange = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement userToChange = DesktopSession.FindElementByName("ID Строка 0");
             userToChange.Click();
             workerChangeComboBox.Click();
-            workerChangeComboBox.FindElementByName("Ñåêðåòàðü").Click();
+            workerChangeComboBox.FindElementByName("Секретарь").Click();
             workerChangeButton.Click();
 
             SortButton2.Click();
             SortButton2.Click();
-            WindowsElement changedPost = DesktopSession.FindElementByName("Post Ñòðîêà 0");
+            WindowsElement changedPost = DesktopSession.FindElementByName("Post Строка 0");
             string changedPostValue = changedPost.GetAttribute("Value.Value");
-            WindowsElement userToFire = DesktopSession.FindElementByName("ID Ñòðîêà 0");
+            WindowsElement userToFire = DesktopSession.FindElementByName("ID Строка 0");
             userToFire.Click();
             fireButton.Click();
 
-            Assert.AreEqual(changedPostValue, "Ñåêðåòàðü");
+            Assert.AreEqual(changedPostValue, "Секретарь");
+            DesktopSession.Close();
+            DesktopSession.Quit();
+        }
+
+        //Сценарий 10: Пользователь включает приложение, переходит на страницу регистрации. Вводит слабый пароль, 
+        // получает соответсвующую ошибку. Вводит существующий логин, получает ошибку. Не заполняет одно из полей, 
+        // получает соответсвующую ошибку. Вводит все поля правильно, получает сообщение об успешной регистрации в
+        // системе. Заходит администратор и отказывает пользователю в желаемой должности, тем самым, удаляет его
+        // из системы. 
+
+        [Test]
+        public void Test9_register_errors()
+        {
+            String testLogin = "hr";
+            String testPassword = "12345";
+
+            WindowsElement loginTextBox = DesktopSession.FindElementByAccessibilityId("loginTextBox");
+            WindowsElement passwordTextBox = DesktopSession.FindElementByAccessibilityId("passwordTextBox");
+            WindowsElement loginButton = DesktopSession.FindElementByAccessibilityId("loginButton");
+            WindowsElement registerButton = DesktopSession.FindElementByAccessibilityId("registerButton");
+
+            registerButton.Click();
+
+            WindowsElement registereLoginTextBox = DesktopSession.FindElementByAccessibilityId("loginRegisterTextBox");
+            registereLoginTextBox.SendKeys("Test login");
+            WindowsElement registerPasswordTextBox = DesktopSession.FindElementByAccessibilityId("passwordRegisterTextBox");
+            registerPasswordTextBox.SendKeys("123");
+
+            WindowsElement registerButton2 = DesktopSession.FindElementByAccessibilityId("registerButton2");
+            registerButton2.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(1));
+
+            WindowsElement ErrorBar = DesktopSession.FindElementByAccessibilityId("65535");
+            string ActErrorText1 = ErrorBar.GetAttribute("Name");
+
+            WindowsElement AcceptClick = DesktopSession.FindElementByAccessibilityId("2");
+            AcceptClick.Click();
+
+            registereLoginTextBox.Clear();
+            registereLoginTextBox.SendKeys("worker");
+            registerPasswordTextBox.Clear();
+            registerPasswordTextBox.SendKeys("1234");
+            registerButton2.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(1));
+
+            WindowsElement ErrorBar2 = DesktopSession.FindElementByAccessibilityId("65535");
+            string ActErrorText2 = ErrorBar2.GetAttribute("Name");
+
+            WindowsElement AcceptClick2 = DesktopSession.FindElementByAccessibilityId("2");
+            AcceptClick2.Click();
+
+            registereLoginTextBox.Clear();
+            registereLoginTextBox.SendKeys("test2");
+            registerPasswordTextBox.Clear();
+            registerButton2.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(1));
+
+            WindowsElement ErrorBar3 = DesktopSession.FindElementByAccessibilityId("65535");
+            string ActErrorText3 = ErrorBar3.GetAttribute("Name");
+
+            WindowsElement AcceptClick3 = DesktopSession.FindElementByAccessibilityId("2");
+            AcceptClick3.Click();
+
+            registereLoginTextBox.Clear();
+            registereLoginTextBox.SendKeys("test2");
+            registerPasswordTextBox.Clear();
+            registerPasswordTextBox.SendKeys("1234");
+            registerButton2.Click();
+
+            var allWindowHandles = DesktopSession.WindowHandles;
+            DesktopSession.SwitchTo().Window(allWindowHandles[0]);
+
+            loginTextBox.SendKeys(testLogin);
+            passwordTextBox.SendKeys(testPassword);
+            loginButton.Click();
+
+            var allWindowHandles2 = DesktopSession.WindowHandles;
+            DesktopSession.SwitchTo().Window(allWindowHandles2[0]);
+
+            WindowsElement newbiesButton = DesktopSession.FindElementByAccessibilityId("newbiesButton");
+            newbiesButton.Click();
+
+            WindowsElement declineButton = DesktopSession.FindElementByAccessibilityId("declineButton");
+            WindowsElement SortButton = DesktopSession.FindElementByName("ID");
+            SortButton.Click();
+            SortButton.Click();
+
+            WindowsElement userToDeclineCell = DesktopSession.FindElementByName("ID Строка 0");
+            userToDeclineCell.Click();
+            declineButton.Click();
+
+            Assert.AreEqual(ActErrorText1, "Password must contain atleast 4 symbols");
+            Assert.AreEqual(ActErrorText2, "Username taken");
+            Assert.AreEqual(ActErrorText3, "Fill in all forms");
             DesktopSession.Close();
             DesktopSession.Quit();
         }

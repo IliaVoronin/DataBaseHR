@@ -35,7 +35,7 @@ namespace DataBaseHR
             {
                 if (password.Length < 4)
                 {
-                    //MessageBox.Show("Password must contain atleast 4 symbols");
+                    MessageBox.Show("Password must contain atleast 4 symbols", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return "Password must contain atleast 4 symbols";
                 }
 
@@ -43,13 +43,12 @@ namespace DataBaseHR
 
                 if (checkTable.Any())
                 {
-                    //MessageBox.Show("Username taken");
+                    MessageBox.Show("Username taken", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return "Username taken";
 
                 }
                 else
                 {
-
                     encryptedPassword = EncryptionDecryptionUsingSymmetricKey.AesOperation.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", password);
                     Console.WriteLine(encryptedPassword);
                     DBUtils.ExecuteCommand(String.Format("insert into userTable(userGroup, userLogin, userPassword ,userPost) values (1, '{0}','{1}', 1)", login, encryptedPassword));
@@ -58,7 +57,7 @@ namespace DataBaseHR
                     return "Regestration succesful";
                 }
             }
-            //MessageBox.Show("Fill in all forms");
+            MessageBox.Show("Fill in all forms", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return "Fill in all forms";
         }
     }
